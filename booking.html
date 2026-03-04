@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" id="root-html" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bespoke Elegance | Custom Tailoring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { gold: '#C5A059', darkNavy: '#05070A' },
+                    transitionProperty: { 'width': 'width' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: #C5A059;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .glass { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-white text-gray-900 dark:bg-darkNavy dark:text-gray-100 transition-colors duration-500">
+
+    
+  <nav class="fixed w-full z-50 bg-white/80 dark:bg-darkNavy/80 border-b border-gray-100 dark:border-gray-800 glass transition-all duration-300">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 h-20 lg:h-24 flex justify-between items-center">
+        <a href="index.html">
+             <div class="flex flex-col leading-none flex-shrink-0">
+            <span class="text-xl lg:text-2xl font-serif font-bold tracking-[0.15em] lg:tracking-[0.2em] text-gold">STITCH</span>
+           
+        </div>
+        </a>
+       
+
+        <div class="hidden lg:flex items-center space-x-4 xl:space-x-8">
+         
+ <div class="flex space-x-4 xl:space-x-6 text-[11px] xl:text-sm uppercase tracking-widest font-medium">
+    <a href="index.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">
+        Home
+       
+    </a>
+
+    <a href="home2.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Home 2</a>
+    <a href="booking.html" class="relative text-gold font-bold transition-all whitespace-nowrap">Book Now
+         <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-gold"></span>
+    </a>
+    <a href="services.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Services</a>
+    <a href="gallery.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Gallery</a>
+    <a href="contact.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Contact</a>
+</div>
+
+            <div class="flex items-center bg-gray-100/50 dark:bg-gray-900/50 p-1 lg:p-1.5 rounded-full border border-gray-200 dark:border-gray-700 space-x-1 lg:space-x-2">
+                <button onclick="toggleTheme()" class="w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center rounded-full hover:bg-white dark:hover:bg-gray-800 transition shadow-sm" title="Toggle Theme">
+                    <i class="fa-solid fa-circle-half-stroke text-xs lg:text-base"></i>
+                </button>
+                
+                <button onclick="toggleDirection()" class="text-[9px] lg:text-[10px] font-bold w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-gray-300 dark:border-gray-600 hover:border-gold transition uppercase" id="dir-label">LTR</button>
+                
+                <a href="login.html" class="px-3 xl:px-4 py-1.5 xl:py-2 border border-gold/30 hover:border-gold text-gold rounded-full text-[10px] xl:text-xs font-bold uppercase tracking-tighter transition-all whitespace-nowrap">
+                    Register
+                </a>
+
+                <a href="user.html" class="flex items-center space-x-1 xl:space-x-2 px-3 xl:px-4 py-1.5 xl:py-2 bg-gold text-white rounded-full text-[10px] xl:text-xs font-bold uppercase tracking-tighter hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all shadow-lg shadow-gold/20 whitespace-nowrap">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span class="hidden xl:inline">Dashboard</span>
+                    <span class="xl:hidden">User</span>
+                </a>
+            </div>
+        </div>
+
+        <button id="menu-open" class="lg:hidden p-2 text-2xl hover:text-gold transition-transform active:scale-90">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+    </div>
+</nav>
+
+    <div id="sidebar" class="fixed inset-0 z-[100] invisible">
+        <div id="sidebar-overlay" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300"></div>
+        <div id="sidebar-content" class="absolute right-0 top-0 h-full w-[300px] bg-white dark:bg-darkNavy shadow-2xl transform translate-x-full transition-transform duration-300 p-8 flex flex-col">
+            <div class="flex justify-between items-center mb-12">
+                <span class="text-gold font-serif font-bold">MENU</span>
+                <button id="menu-close" class="text-2xl">&times;</button>
+            </div>
+            
+            <div class="flex justify-between mb-8 p-4 bg-gray-100 dark:bg-gray-900 rounded-xl">
+                <button onclick="toggleTheme()" class="flex items-center space-x-2">
+                    <i class="fa-solid fa-moon"></i> <span>Theme</span>
+                </button>
+                <button onclick="toggleDirection()" class="font-bold border-l border-gray-300 dark:border-gray-700 pl-4" id="dir-label-mobile">LTR</button>
+            </div>
+            <nav class="flex flex-col space-y-4 text-lg font-serif mb-10">
+    <a href="index.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Home
+       
+    </a>
+
+    <a href="home2.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Home 2
+    </a>
+
+    <a href="booking.html" class="flex items-center justify-between text-gold border-l-4 border-gold pl-4 transition-all duration-300 font-bold bg-gold/5 py-2">
+        Book Now
+         <i class="fa-solid fa-chevron-right text-[10px]"></i>
+    </a>
+
+    <a href="services.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Services
+    </a>
+
+    <a href="gallery.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Gallery
+    </a>
+
+    <a href="contact.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Contact
+    </a>
+</nav>
+
+            
+            <div class="mt-auto space-y-4">
+        <a href="user.html" class="flex items-center justify-center space-x-3 w-full bg-gold text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg shadow-gold/20 active:scale-[0.98] transition-all">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>User Dashboard</span>
+        </a>
+
+        <a href="login.html" class="flex items-center justify-center w-full border-2 border-gold text-gold py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-gold hover:text-white active:scale-[0.98] transition-all">
+            Register Account
+        </a>
+    </div>
+        </div>
+    </div>  
+    <script>
+        // Function to highlight the active menu item based on the URL
+function highlightActiveLink() {
+    const currentPath = window.location.pathname.split("/").pop() || 'index.html';
+    const allLinks = document.querySelectorAll('nav a, #sidebar-content nav a');
+
+    allLinks.forEach(link => {
+        const linkPath = link.getAttribute('href');
+        
+        if (linkPath === currentPath) {
+            // Apply Desktop Active Classes
+            link.classList.add('text-gold', 'font-bold');
+            // If it's the sidebar link, add the border
+            if (link.closest('#sidebar-content')) {
+                link.classList.add('border-l-4', 'border-gold', 'pl-4', 'bg-gold/5');
+            }
+        }
+    });
+}
+
+// Call on load
+window.addEventListener('DOMContentLoaded', highlightActiveLink);
+    </script>
+    <br>
+
+
+
+    <section id="booking-hero" class="relative pt-32 pb-16 lg:pt-48 lg:pb-32 px-6 overflow-hidden bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500">
+    
+    <div class="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.1] pointer-events-none">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#C5A059" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+    </div>
+
+    <div class="max-w-[1024px] mx-auto relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <div class="space-y-8 text-center lg:text-left">
+                <div class="inline-flex items-center gap-3 px-4 py-2 border border-gold/20 bg-gold/5 rounded-full">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+                    </span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] font-bold text-gold">Booking for March 2026</span>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-serif text-gray-900 dark:text-white leading-[1.1]">
+                    The Private <br> <span class="italic text-gold">Appointment.</span>
+                </h1>
+
+                <p class="text-gray-500 dark:text-zinc-400 text-lg font-light leading-relaxed max-w-md mx-auto lg:mx-0">
+                    A dedicated hour with our master clothiers. Select your fabrics, define your silhouette, and begin your bespoke legacy.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                    <a href="#booking-section" class="px-10 py-5 bg-gray-900 dark:bg-gold text-white dark:text-zinc-950 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-gold dark:hover:bg-white transition-all shadow-xl">
+                        Select Your Slot
+                    </a>
+                    <a href="comingsoon.html" class="px-10 py-5 border border-gray-200 dark:border-zinc-800 text-gray-900 dark:text-gray-300 text-[10px] font-bold uppercase tracking-[0.4em] hover:border-gold hover:text-gold transition-all">
+                        View Rates
+                    </a>
+                </div>
+            </div>
+
+            <div class="hidden lg:block relative group">
+                <div class="aspect-[4/5] border border-gray-200 dark:border-zinc-800 flex items-center justify-center relative overflow-hidden bg-white dark:bg-zinc-900 shadow-2xl transition-transform duration-700 group-hover:-translate-y-2 rounded-2xl p-8">
+    
+    <div class="absolute inset-0 z-0">
+        <img src="assets/Wedding Suits" alt="Tailoring studio background" class="w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110">
+        <div class="absolute inset-0 bg-black/60 dark:bg-black/80 transition-colors"></div>
+    </div>
+
+    <div class="absolute inset-0 z-10 opacity-[0.05] dark:opacity-[0.1] transition-transform duration-[10s] group-hover:scale-125">
+         <i class="fa-solid fa-scissors text-[20rem] absolute -top-10 -right-10 rotate-12 text-black dark:text-white"></i>
+         <i class="fa-solid fa-tape text-[15rem] absolute -bottom-10 -left-10 -rotate-12 text-black dark:text-white"></i>
+    </div>
+
+    <div class="relative z-20 text-center space-y-4">
+        <p class="text-[10px] uppercase tracking-[0.5em] text-gold font-bold">Standard Fitting</p>
+        <h3 class="text-4xl font-serif text-white">60 <span class="text-xl italic font-sans font-light">mins</span></h3>
+        <div class="w-8 h-[1px] bg-gold mx-auto"></div>
+        <p class="text-[9px] uppercase tracking-widest text-gray-200">Personalized Consultation</p>
+    </div>
+</div>
+                <div class="absolute -bottom-6 -left-6 bg-white dark:bg-zinc-800 p-6 border border-gray-100 dark:border-zinc-700 shadow-xl flex items-center gap-4 transition-transform duration-500 delay-100 group-hover:translate-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                        <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Location</p>
+                        <p class="text-xs font-serif dark:text-white">Savile Row, London</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="booking-section" class="py-20 px-6 bg-[#F9F8F6] dark:bg-zinc-950 transition-colors duration-500">
+    <div class="max-w-[1024px] mx-auto">
+        
+        <div class="text-center mb-16 space-y-4">
+            <h2 class="text-gold uppercase tracking-[0.5em] text-[10px] font-bold">Reservations</h2>
+            <h3 class="text-4xl md:text-5xl font-serif text-gray-900 dark:text-white">Secure Your <span class="italic text-gold">Fitting.</span></h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <div class="lg:col-span-8 space-y-12 bg-white dark:bg-zinc-900 p-8 md:p-12 shadow-sm border border-gray-100 dark:border-zinc-800">
+                
+                <div class="step-container">
+                    <p class="text-[10px] uppercase tracking-widest text-gold font-bold mb-6">01. Select Service</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="relative group cursor-pointer">
+                            <input type="radio" name="service" value="Bespoke Suit" class="peer hidden" onchange="updateSummary('service', 'Bespoke Suit')" checked>
+                            <div class="p-6 border border-gray-100 dark:border-zinc-800 peer-checked:border-gold peer-checked:bg-gold/5 transition-all duration-300">
+                                <h4 class="font-serif text-lg dark:text-white">Bespoke Suit</h4>
+                                <p class="text-[10px] text-gray-400 mt-2 uppercase">3 Fittings • 8-12 Weeks</p>
+                            </div>
+                        </label>
+                        <label class="relative group cursor-pointer">
+                            <input type="radio" name="service" value="Formal Overcoat" class="peer hidden" onchange="updateSummary('service', 'Formal Overcoat')">
+                            <div class="p-6 border border-gray-100 dark:border-zinc-800 peer-checked:border-gold peer-checked:bg-gold/5 transition-all duration-300">
+                                <h4 class="font-serif text-lg dark:text-white">Formal Overcoat</h4>
+                                <p class="text-[10px] text-gray-400 mt-2 uppercase">2 Fittings • 6-10 Weeks</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step-container">
+                    <p class="text-[10px] uppercase tracking-widest text-gold font-bold mb-6">02. Choose Month</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button type="button" onclick="updateSummary('date', 'March 2026')" class="date-btn active px-6 py-3 border border-gray-100 dark:border-zinc-800 text-[10px] font-bold uppercase tracking-widest dark:text-white hover:border-gold transition-all">March</button>
+                        <button type="button" onclick="updateSummary('date', 'April 2026')" class="date-btn px-6 py-3 border border-gray-100 dark:border-zinc-800 text-[10px] font-bold uppercase tracking-widest dark:text-white hover:border-gold transition-all">April</button>
+                        <button type="button" onclick="updateSummary('date', 'May 2026')" class="date-btn px-6 py-3 border border-gray-100 dark:border-zinc-800 text-[10px] font-bold uppercase tracking-widest dark:text-white hover:border-gold transition-all">May</button>
+                    </div>
+                </div>
+
+                <div class="step-container pt-4">
+                    <p class="text-[10px] uppercase tracking-widest text-gold font-bold mb-8">03. Final Details</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div class="relative">
+                            <input type="text" id="user-name" placeholder=" " oninput="updateSummary('name', this.value)" class="w-full bg-transparent border-b border-gray-200 dark:border-zinc-700 py-2 focus:outline-none focus:border-gold dark:text-white transition-all peer">
+                            <label class="absolute left-0 top-2 text-[10px] uppercase tracking-widest text-gray-400 font-bold pointer-events-none transition-all peer-focus:-translate-y-6 peer-focus:text-gold peer-[:not(:placeholder-shown)]:-translate-y-6">Full Name</label>
+                        </div>
+                        <div class="relative">
+                            <input type="email" placeholder=" " class="w-full bg-transparent border-b border-gray-200 dark:border-zinc-700 py-2 focus:outline-none focus:border-gold dark:text-white transition-all peer">
+                            <label class="absolute left-0 top-2 text-[10px] uppercase tracking-widest text-gray-400 font-bold pointer-events-none transition-all peer-focus:-translate-y-6 peer-focus:text-gold peer-[:not(:placeholder-shown)]:-translate-y-6">Email Address</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="w-full py-5 bg-gray-900 dark:bg-gold text-white dark:text-zinc-950 text-[10px] font-bold uppercase tracking-[0.4em] hover:opacity-90 transition-all shadow-xl">
+                    Confirm Reservation
+                </button>
+            </div>
+
+            <div class="lg:col-span-4 space-y-6">
+    <div class="bg-white dark:bg-zinc-900 p-8 border border-gold/20 relative overflow-hidden transition-all duration-500 hover:shadow-xl group">
+        
+        <div class="absolute top-0 left-0 w-0 h-[2px] bg-gold group-hover:w-full transition-all duration-700"></div>
+        <div class="absolute top-0 left-0 w-full h-[2px] bg-gold opacity-10"></div>
+        
+        <h4 class="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400 mb-8">Your Commission</h4>
+        
+        <ul class="space-y-6">
+            <li class="flex justify-between items-end border-b border-gray-50 dark:border-zinc-800 pb-2">
+                <span class="text-[9px] uppercase tracking-widest text-gray-400">Service</span>
+                <span id="sum-service" class="font-serif text-lg dark:text-white transition-all duration-300">Bespoke Suit</span>
+            </li>
+            <li class="flex justify-between items-end border-b border-gray-50 dark:border-zinc-800 pb-2">
+                <span class="text-[9px] uppercase tracking-widest text-gray-400">Timeline</span>
+                <span id="sum-date" class="font-serif text-lg dark:text-white transition-all duration-300">March 2026</span>
+            </li>
+            <li class="flex justify-between items-end border-b border-gray-50 dark:border-zinc-800 pb-2">
+                <span class="text-[9px] uppercase tracking-widest text-gray-400">Client</span>
+                <span id="sum-name" class="font-serif text-lg dark:text-white italic transition-all duration-300">Guest</span>
+            </li>
+        </ul>
+
+        <div class="mt-10 pt-8 border-t border-gray-100 dark:border-zinc-800">
+            <div class="flex items-center gap-4 bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-sm">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+                <p class="text-[9px] uppercase tracking-widest text-gray-500 dark:text-gray-400 font-medium">Slots Available</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-6 text-center bg-gray-50 dark:bg-zinc-900/30 border border-dashed border-gray-200 dark:border-zinc-800">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest leading-loose">
+            A <span class="text-gold font-bold">non-refundable fitting fee</span> of £150 is required to secure your initial appointment.
+        </p>
+    </div>
+</div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    .date-btn.active {
+        border-color: #C5A059;
+        background-color: #C5A059;
+        color: white;
+    }
+</style>
+
+<script>
+    function updateSummary(field, value) {
+        if (field === 'service') {
+            document.getElementById('sum-service').innerText = value;
+        }
+        if (field === 'date') {
+            document.getElementById('sum-date').innerText = value;
+            // Update active button state
+            const buttons = document.querySelectorAll('.date-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        if (field === 'name') {
+            document.getElementById('sum-name').innerText = value || 'Guest';
+        }
+    }
+</script>
+<section class="py-24 px-6 bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500 overflow-hidden relative">
+    
+    <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] dark:opacity-[0.05] pointer-events-none select-none">
+        <span class="text-[15rem] lg:text-[25rem] font-serif font-bold uppercase tracking-tighter text-gray-900 dark:text-white">Bespoke</span>
+    </div>
+
+    <div class="max-w-[1024px] mx-auto relative z-10">
+        <div class="bg-white dark:bg-zinc-900 p-12 lg:p-20 text-center space-y-10 relative overflow-hidden group border border-gray-100 dark:border-zinc-800 shadow-[0_20px_50px_rgba(0,0,0,0.04)]">
+            
+            <div class="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-gold/40 transition-all duration-700 group-hover:w-24 group-hover:h-24"></div>
+            <div class="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-gold/40 transition-all duration-700 group-hover:w-24 group-hover:h-24"></div>
+
+            <div class="space-y-4">
+                <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold">Ready for your fitting?</h2>
+                <h3 class="text-4xl md:text-6xl font-serif text-zinc-900 dark:text-white leading-tight">Your Silhouette <br> <span class="italic text-gold">Awaits.</span></h3>
+            </div>
+
+            <p class="text-gray-500 dark:text-gray-400 text-sm font-light max-w-md mx-auto leading-relaxed">
+                Join our exclusive circle of gentlemen and experience the pinnacle of sartorial craft. Limited slots available for the upcoming season.
+            </p>
+
+            <div class="pt-6">
+                <a href="contact.html">
+                     <button id="magnetic-btn" class="inline-block px-16 py-6 bg-zinc-950 dark:bg-gold text-white dark:text-zinc-950 text-[10px] font-bold uppercase tracking-[0.5em] transition-all duration-300 hover:bg-gold dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 shadow-2xl active:scale-95">
+                    Book Appointment
+                </button>
+                </a>
+               
+            </div>
+
+           
+        </div>
+    </div>
+</section>
+
+<script>
+    // Magnetic Button Effect
+    const btn = document.querySelector('#magnetic-btn');
+    
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        // Move the button slightly toward the mouse
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.5}px) scale(1.05)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = `translate(0px, 0px) scale(1)`;
+    });
+</script>
+
+     <footer class="bg-gray-50 dark:bg-black pt-16 lg:pt-20 pb-10 px-6 border-t border-gray-200 dark:border-gray-800 transition-colors duration-500">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+            
+            <div class="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
+                <a href="index.html">
+                    <div class="flex flex-col leading-none">
+                    <span class="text-2xl font-serif font-bold tracking-[0.2em] text-gold uppercase">Stitch</span>
+                    <!-- <span class="text-[10px] uppercase tracking-[0.4em] opacity-60 dark:text-white">Bespoke</span> -->
+                </div>
+                </a>
+                
+                <p class="text-sm opacity-70 leading-relaxed max-w-xs">
+                    Mastering the art of bespoke tailoring since 1992. Every stitch tells a story of elegance and precision.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gold hover:text-white hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gold hover:text-white hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-facebook-f text-base"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gold hover:text-white hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-bold uppercase tracking-[0.2em] mb-6 text-xs text-gold">Explore</h4>
+                <ul class="space-y-4 text-sm opacity-80 text-center md:text-left">
+                    <li><a href="index.html" class="hover:text-gold transition-colors block">Home</a></li>
+                    <li><a href="about.html" class="hover:text-gold transition-colors block">About Us</a></li>
+                    <li><a href="service.html" class="hover:text-gold transition-colors block">Services</a></li>
+                    <li><a href="404.html" class="text-red-500/80 hover:text-red-500 transition-colors block">404 Page</a></li>
+                    <li><a href="comingsoon.html" class="hover:text-gold transition-colors block">Coming Soon</a></li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-bold uppercase tracking-[0.2em] mb-6 text-xs text-gold">Services</h4>
+                <ul class="space-y-4 text-sm opacity-80 text-center md:text-left">
+                    <li><a href="home2.html" class="hover:text-gold transition-colors block">Home2</a></li>
+                    <li><a href="contact.html" class="hover:text-gold transition-colors block">Contact Us</a></li>
+                    <li><a href="booknow.html" class="hover:text-gold transition-colors block">Book Now</a></li>
+                    <li><a href="gallery.html" class="hover:text-gold transition-colors block">Gallery</a></li>
+                    <li><a href="user.html" class="hover:text-gold transition-colors block">User Dashboard</a></li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-bold uppercase tracking-[0.2em] mb-6 text-xs text-gold text-center md:text-left">Stay Informed</h4>
+                <p class="text-xs opacity-70 mb-6 text-center md:text-left">Subscribe to receive style guides and exclusive fabric launch alerts.</p>
+                <div class="relative w-full max-w-sm">
+                    <input type="email" placeholder="Email Address" 
+                        class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 pr-12 lg:pr-32 focus:outline-none focus:border-gold transition-all text-sm rounded-sm">
+                    <button class="absolute right-2 top-2 bottom-2 bg-gold text-white px-4 lg:px-6 font-bold uppercase text-[10px] tracking-widest hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all">
+                        <span class="hidden lg:inline">Subscribe</span>
+                        <i class="fa-solid fa-paper-plane lg:hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center pt-10 border-t border-gray-200 dark:border-gray-800">
+            <p class="text-[9px] lg:text-[10px] uppercase tracking-[0.3em] opacity-50 dark:text-white">
+                &copy; 2026 Stitch & Style Bespoke. Crafted with Passion.
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        const root = document.getElementById('root-html');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarContent = document.getElementById('sidebar-content');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        // Sidebar Interaction
+        document.getElementById('menu-open').onclick = () => {
+            sidebar.classList.remove('invisible');
+            setTimeout(() => {
+                sidebarContent.classList.remove('translate-x-full');
+                sidebarOverlay.classList.replace('opacity-0', 'opacity-100');
+            }, 10);
+        };
+
+        const closeMenu = () => {
+            sidebarContent.classList.add('translate-x-full');
+            sidebarOverlay.classList.replace('opacity-100', 'opacity-0');
+            setTimeout(() => sidebar.classList.add('invisible'), 300);
+        };
+
+        document.getElementById('menu-close').onclick = closeMenu;
+        sidebarOverlay.onclick = closeMenu;
+
+        // Theme Toggle
+        function toggleTheme() {
+            root.classList.toggle('dark');
+            localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Direction Toggle
+        function toggleDirection() {
+            const isRtl = root.getAttribute('dir') === 'rtl';
+            const newDir = isRtl ? 'ltr' : 'rtl';
+            root.setAttribute('dir', newDir);
+            localStorage.setItem('dir', newDir);
+            document.getElementById('dir-label').innerText = newDir.toUpperCase();
+            document.getElementById('dir-label-mobile').innerText = newDir.toUpperCase();
+        }
+
+        // Init
+        if (localStorage.theme === 'dark') root.classList.add('dark');
+        if (localStorage.dir) {
+            root.setAttribute('dir', localStorage.dir);
+            document.getElementById('dir-label').innerText = localStorage.dir.toUpperCase();
+        }
+    </script>
+</body>
+</html>

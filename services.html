@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en" id="root-html" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bespoke Elegance | Custom Tailoring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { gold: '#C5A059', darkNavy: '#05070A' },
+                    transitionProperty: { 'width': 'width' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: #C5A059;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .glass { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-white text-gray-900 dark:bg-darkNavy dark:text-gray-100 transition-colors duration-500">
+
+    
+  <nav class="fixed w-full z-50 bg-white/80 dark:bg-darkNavy/80 border-b border-gray-100 dark:border-gray-800 glass transition-all duration-300">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 h-20 lg:h-24 flex justify-between items-center">
+        <a href="index.html">
+             <div class="flex flex-col leading-none flex-shrink-0">
+            <span class="text-xl lg:text-2xl font-serif font-bold tracking-[0.15em] lg:tracking-[0.2em] text-gold">STITCH</span>
+           
+        </div>
+        </a>
+       
+
+        <div class="hidden lg:flex items-center space-x-4 xl:space-x-8">
+         
+ <div class="flex space-x-4 xl:space-x-6 text-[11px] xl:text-sm uppercase tracking-widest font-medium">
+    <a href="index.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">
+        Home
+      
+    </a>
+
+    <a href="home2.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Home 2</a>
+    <a href="booking.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Book Now</a>
+    <a href="services.html" class="relative text-gold font-bold transition-all whitespace-nowrap">Services
+          <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-gold"></span>
+    </a>
+    <a href="gallery.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Gallery</a>
+    <a href="contact.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Contact</a>
+</div>
+
+            <div class="flex items-center bg-gray-100/50 dark:bg-gray-900/50 p-1 lg:p-1.5 rounded-full border border-gray-200 dark:border-gray-700 space-x-1 lg:space-x-2">
+                <button onclick="toggleTheme()" class="w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center rounded-full hover:bg-white dark:hover:bg-gray-800 transition shadow-sm" title="Toggle Theme">
+                    <i class="fa-solid fa-circle-half-stroke text-xs lg:text-base"></i>
+                </button>
+                
+                <button onclick="toggleDirection()" class="text-[9px] lg:text-[10px] font-bold w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-gray-300 dark:border-gray-600 hover:border-gold transition uppercase" id="dir-label">LTR</button>
+                
+                <a href="login.html" class="px-3 xl:px-4 py-1.5 xl:py-2 border border-gold/30 hover:border-gold text-gold rounded-full text-[10px] xl:text-xs font-bold uppercase tracking-tighter transition-all whitespace-nowrap">
+                    Register
+                </a>
+
+                <a href="user.html" class="flex items-center space-x-1 xl:space-x-2 px-3 xl:px-4 py-1.5 xl:py-2 bg-gold text-white rounded-full text-[10px] xl:text-xs font-bold uppercase tracking-tighter hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all shadow-lg shadow-gold/20 whitespace-nowrap">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span class="hidden xl:inline">Dashboard</span>
+                    <span class="xl:hidden">User</span>
+                </a>
+            </div>
+        </div>
+
+        <button id="menu-open" class="lg:hidden p-2 text-2xl hover:text-gold transition-transform active:scale-90">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+    </div>
+</nav>
+
+    <div id="sidebar" class="fixed inset-0 z-[100] invisible">
+        <div id="sidebar-overlay" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300"></div>
+        <div id="sidebar-content" class="absolute right-0 top-0 h-full w-[300px] bg-white dark:bg-darkNavy shadow-2xl transform translate-x-full transition-transform duration-300 p-8 flex flex-col">
+            <div class="flex justify-between items-center mb-12">
+                <span class="text-gold font-serif font-bold">MENU</span>
+                <button id="menu-close" class="text-2xl">&times;</button>
+            </div>
+            
+            <div class="flex justify-between mb-8 p-4 bg-gray-100 dark:bg-gray-900 rounded-xl">
+                <button onclick="toggleTheme()" class="flex items-center space-x-2">
+                    <i class="fa-solid fa-moon"></i> <span>Theme</span>
+                </button>
+                <button onclick="toggleDirection()" class="font-bold border-l border-gray-300 dark:border-gray-700 pl-4" id="dir-label-mobile">LTR</button>
+            </div>
+            <nav class="flex flex-col space-y-4 text-lg font-serif mb-10">
+    <a href="index.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Home
+       
+    </a>
+
+    <a href="home2.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Home 2
+    </a>
+
+    <a href="booking.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Book Now
+    </a>
+
+    <a href="services.html" class="flex items-center justify-between text-gold border-l-4 border-gold pl-4 transition-all duration-300 font-bold bg-gold/5 py-2">
+        Services
+         <i class="fa-solid fa-chevron-right text-[10px]"></i>
+    </a>
+
+    <a href="gallery.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Gallery
+    </a>
+
+    <a href="contact.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Contact
+    </a>
+</nav>
+
+            
+            <div class="mt-auto space-y-4">
+        <a href="user.html" class="flex items-center justify-center space-x-3 w-full bg-gold text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg shadow-gold/20 active:scale-[0.98] transition-all">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>User Dashboard</span>
+        </a>
+
+        <a href="login.html" class="flex items-center justify-center w-full border-2 border-gold text-gold py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-gold hover:text-white active:scale-[0.98] transition-all">
+            Register Account
+        </a>
+    </div>
+        </div>
+    </div>  
+    <script>
+        // Function to highlight the active menu item based on the URL
+function highlightActiveLink() {
+    const currentPath = window.location.pathname.split("/").pop() || 'index.html';
+    const allLinks = document.querySelectorAll('nav a, #sidebar-content nav a');
+
+    allLinks.forEach(link => {
+        const linkPath = link.getAttribute('href');
+        
+        if (linkPath === currentPath) {
+            // Apply Desktop Active Classes
+            link.classList.add('text-gold', 'font-bold');
+            // If it's the sidebar link, add the border
+            if (link.closest('#sidebar-content')) {
+                link.classList.add('border-l-4', 'border-gold', 'pl-4', 'bg-gold/5');
+            }
+        }
+    });
+}
+
+// Call on load
+window.addEventListener('DOMContentLoaded', highlightActiveLink);
+    </script>
+    <br>
+
+<section class="relative min-h-[80vh] flex items-center bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500 overflow-hidden">
+    
+    <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
+         style="background-image: radial-gradient(#000 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+
+    <div class="max-w-[1024px] mx-auto w-full px-6 py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            
+            <div class="lg:col-span-7 space-y-10 text-center lg:text-left">
+                
+                <div class="space-y-6">
+                    <div class="flex items-center justify-center lg:justify-start gap-3">
+                        <span class="w-8 h-[1px] bg-gold"></span>
+                        <span class="text-[10px] uppercase tracking-[0.5em] text-gold font-bold">The Bespoke Service</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-7xl font-serif text-zinc-900 dark:text-white leading-[1.1]">
+                        Tailored to <br> <span class="italic text-gold">Perfection.</span>
+                    </h1>
+
+                    <p class="text-zinc-500 dark:text-zinc-400 text-base md:text-lg font-light max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                        Experience true bespoke craftsmanship designed around you. Every stitch is a testament to your unique story and style.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-6 pt-4">
+                    <a href="booking.html">
+                        <button class="w-full sm:w-auto px-10 py-6 bg-zinc-950 dark:bg-gold text-white dark:text-zinc-950 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-gold dark:hover:bg-white hover:text-white transition-all shadow-xl active:scale-95">
+                        Book Consultation
+                    </button>
+                    </a>
+                    
+                    
+                    <a href="#fabrics" class="group flex items-center gap-4 text-[10px] uppercase tracking-[0.4em] text-zinc-400 hover:text-gold transition-colors">
+                        Explore Fabrics
+                        <div class="relative overflow-hidden w-6 h-[1px] bg-zinc-300 dark:bg-zinc-800">
+                            <div class="absolute inset-0 bg-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 relative group">
+                <div class="relative aspect-[4/5] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
+                    <img src="assets/Bespoke Craftsmanship" 
+                         alt="Bespoke Craftsmanship" 
+                         class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100">
+                    
+                    <div class="absolute bottom-6 -right-6 bg-white dark:bg-zinc-800 p-6 shadow-2xl border border-gray-100 dark:border-zinc-700 hidden md:block">
+                        <p class="text-[10px] uppercase tracking-widest text-gold font-bold mb-1">Hand-Finished</p>
+                        <p class="text-zinc-500 dark:text-zinc-400 text-[9px]">Savile Row Tradition</p>
+                    </div>
+                </div>
+
+                <div class="absolute -top-4 -left-4 w-24 h-24 border-t border-l border-gold/30"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="py-24 px-6 bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500 overflow-hidden">
+    <div class="max-w-[1024px] mx-auto">
+        
+        <div class="mb-20 text-center">
+            <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold mb-4">The Service Portfolio</h2>
+            <h3 class="text-4xl font-serif text-zinc-900 dark:text-white">Crafted for the <span class="italic text-gold">Individual.</span></h3>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-center">
+            
+            <div class="group relative aspect-[3/4] overflow-hidden bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 transition-all duration-500 hover:border-gold/30 hover:-translate-y-2 hover:shadow-2xl">
+                <div class="absolute inset-0 z-0">
+                    <img src="assets/Bespoke Tailoring" 
+                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
+                         alt="Bespoke Tailoring">
+                </div>
+                <div class="absolute inset-x-0 bottom-0 z-10 p-6 md:p-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm border-t border-gray-100 dark:border-zinc-800 transition-all duration-500 group-hover:bg-white dark:group-hover:bg-zinc-900">
+                    <p class="text-[9px] text-gold uppercase tracking-[0.5em] font-bold mb-3">Signature Service</p>
+                    <h4 class="text-2xl font-serif text-zinc-900 dark:text-white mb-4">Bespoke Tailoring</h4>
+                    
+                    <div class="max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out">
+                        <p class="text-zinc-600 dark:text-zinc-400 text-xs font-light leading-relaxed mb-6">
+                            Fully handcrafted suit from scratch, based on your pattern, measurements, and style. Best for: Weddings & special occasions.
+                        </p>
+                        <button class="w-full py-4 bg-zinc-950 dark:bg-gold text-white dark:text-zinc-950 text-[9px] uppercase tracking-[0.4em] font-bold hover:bg-gold hover:text-white transition-all">
+                            Explore Bespoke
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-[3/4] overflow-hidden bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 transition-all duration-500 hover:border-gold/30 hover:-translate-y-2 hover:shadow-2xl">
+                <div class="absolute inset-0 z-0">
+                    <img src="assets/Made to Measure1" 
+                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
+                         alt="Made to Measure">
+                </div>
+                <div class="absolute inset-x-0 bottom-0 z-10 p-6 md:p-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm border-t border-gray-100 dark:border-zinc-800 transition-all duration-500 group-hover:bg-white dark:group-hover:bg-zinc-900">
+                    <p class="text-[9px] text-gold uppercase tracking-[0.5em] font-bold mb-3">Precision Fit</p>
+                    <h4 class="text-2xl font-serif text-zinc-900 dark:text-white mb-4">Made-to-Measure</h4>
+                    <div class="max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out">
+                        <p class="text-zinc-600 dark:text-zinc-400 text-xs font-light leading-relaxed mb-6">
+                            Pre-designed patterns adjusted precisely to your measurements. Best for: Business professionals & events.
+                        </p>
+                        <button class="w-full py-4 bg-zinc-950 dark:bg-gold text-white dark:text-zinc-950 text-[9px] uppercase tracking-[0.4em] font-bold hover:bg-gold hover:text-white transition-all">
+                            View Options
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative aspect-[3/4] overflow-hidden bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 transition-all duration-500 hover:border-gold/30 hover:-translate-y-2 hover:shadow-2xl lg:col-span-1 md:col-span-2">
+                <div class="absolute inset-0 z-0">
+                    <img src="assets/Wedding Tailoring" 
+                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" 
+                         alt="Wedding Tailoring">
+                </div>
+                <div class="absolute inset-x-0 bottom-0 z-10 p-6 md:p-8 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm border-t border-gray-100 dark:border-zinc-800 transition-all duration-500 group-hover:bg-white dark:group-hover:bg-zinc-900">
+                    <p class="text-[9px] text-gold uppercase tracking-[0.5em] font-bold mb-3">Union Collection</p>
+                    <h4 class="text-2xl font-serif text-zinc-900 dark:text-white mb-4">Wedding Tailoring</h4>
+                    <div class="max-h-0 group-hover:max-h-40 overflow-hidden transition-all duration-700 ease-in-out">
+                        <p class="text-zinc-600 dark:text-zinc-400 text-xs font-light leading-relaxed mb-6">
+                            Groom bespoke suits, groomsmen matching sets, and traditional ceremonial wear. Couple styling consultations included.
+                        </p>
+                        <button class="w-full py-4 bg-zinc-950 dark:bg-gold text-white dark:text-zinc-950 text-[9px] uppercase tracking-[0.4em] font-bold hover:bg-gold hover:text-white transition-all">
+                            Explore Packages
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+        <div class="mt-20 text-center">
+            <button class="px-10 py-5 border border-zinc-200 dark:border-zinc-800 text-[10px] uppercase tracking-[0.4em] text-zinc-500 hover:text-gold hover:border-gold transition-all">
+                View All Specializations
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 px-6 bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500 overflow-hidden">
+    <div class="max-w-[1024px] mx-auto">
+        
+        <div class="mb-16 text-center lg:text-left flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <div class="max-w-xl">
+                <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold mb-4">The Detail Laboratory</h2>
+                <h3 class="text-4xl md:text-5xl font-serif text-zinc-900 dark:text-white">Design Every <span class="italic text-gold">Element.</span></h3>
+            </div>
+            <p class="text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-widest font-medium border-b border-gold/30 pb-2">
+                6 Points of Customization
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            
+            <div class="group relative aspect-[4/5] bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-6 flex flex-col items-center justify-between hover:border-gold transition-all duration-500 cursor-pointer">
+                <div class="w-12 h-12 mb-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                    <svg viewBox="0 0 24 24" fill="none" class="stroke-zinc-900 dark:stroke-white w-full h-full" stroke-width="1">
+                        <path d="M4 4l4 16 4-8 4 8 4-16" />
+                    </svg>
+                </div>
+                <div class="text-center">
+                    <span class="text-[8px] uppercase tracking-widest text-gold font-bold block mb-1">Step 01</span>
+                    <h4 class="text-[11px] uppercase tracking-[0.2em] text-zinc-800 dark:text-white font-bold">Lapel Styles</h4>
+                </div>
+                <div class="absolute top-3 right-3 w-2 h-2 rounded-full border border-gold group-hover:bg-gold transition-all"></div>
+            </div>
+
+            <div class="group relative aspect-[4/5] bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-6 flex flex-col items-center justify-between hover:border-gold transition-all duration-500 cursor-pointer">
+                <div class="w-12 h-12 mb-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                    <svg viewBox="0 0 24 24" fill="none" class="stroke-zinc-900 dark:stroke-white w-full h-full" stroke-width="1">
+                        <circle cx="12" cy="12" r="8" />
+                        <circle cx="9" cy="9" r="1" fill="currentColor"/>
+                        <circle cx="15" cy="9" r="1" fill="currentColor"/>
+                        <circle cx="9" cy="15" r="1" fill="currentColor"/>
+                        <circle cx="15" cy="15" r="1" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="text-center">
+                    <span class="text-[8px] uppercase tracking-widest text-gold font-bold block mb-1">Step 02</span>
+                    <h4 class="text-[11px] uppercase tracking-[0.2em] text-zinc-800 dark:text-white font-bold">Button Selection</h4>
+                </div>
+                <div class="absolute top-3 right-3 w-2 h-2 rounded-full border border-gold group-hover:bg-gold transition-all"></div>
+            </div>
+
+            <div class="group relative aspect-[4/5] bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-6 flex flex-col items-center justify-between hover:border-gold transition-all duration-500 cursor-pointer">
+                <div class="w-12 h-12 mb-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                    <svg viewBox="0 0 24 24" fill="none" class="stroke-zinc-900 dark:stroke-white w-full h-full" stroke-width="1">
+                        <path d="M5 8h14v10a2 2 0 01-2 2H7a2 2 0 01-2-2V8zM5 8l7 4 7-4" />
+                    </svg>
+                </div>
+                <div class="text-center">
+                    <span class="text-[8px] uppercase tracking-widest text-gold font-bold block mb-1">Step 03</span>
+                    <h4 class="text-[11px] uppercase tracking-[0.2em] text-zinc-800 dark:text-white font-bold">Pocket Design</h4>
+                </div>
+                <div class="absolute top-3 right-3 w-2 h-2 rounded-full border border-gold group-hover:bg-gold transition-all"></div>
+            </div>
+
+            <div class="group relative aspect-[4/5] bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-6 flex flex-col items-center justify-between hover:border-gold transition-all duration-500 cursor-pointer">
+                <div class="w-12 h-12 mb-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                    <svg viewBox="0 0 24 24" fill="none" class="stroke-zinc-900 dark:stroke-white w-full h-full" stroke-width="1">
+                        <path d="M4 4h16v16H4z M4 8h16 M4 12h16 M4 16h16 M8 4v16 M12 4v16 M16 4v16" />
+                    </svg>
+                </div>
+                <div class="text-center">
+                    <span class="text-[8px] uppercase tracking-widest text-gold font-bold block mb-1">Step 04</span>
+                    <h4 class="text-[11px] uppercase tracking-[0.2em] text-zinc-800 dark:text-white font-bold">Inner Lining</h4>
+                </div>
+                <div class="absolute top-3 right-3 w-2 h-2 rounded-full border border-gold group-hover:bg-gold transition-all"></div>
+            </div>
+
+            <div class="group relative aspect-[4/5] bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-6 flex flex-col items-center justify-between hover:border-gold transition-all duration-500 cursor-pointer">
+                <div class="w-12 h-12 mb-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                    <svg viewBox="0 0 24 24" fill="none" class="stroke-zinc-900 dark:stroke-white w-full h-full" stroke-width="1">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1" />
+                    </svg>
+                </div>
+                <div class="text-center">
+                    <span class="text-[8px] uppercase tracking-widest text-gold font-bold block mb-1">Step 05</span>
+                    <h4 class="text-[11px] uppercase tracking-[0.2em] text-zinc-800 dark:text-white font-bold">Fabric Texture</h4>
+                </div>
+                <div class="absolute top-3 right-3 w-2 h-2 rounded-full border border-gold group-hover:bg-gold transition-all"></div>
+            </div>
+
+            <div class="group relative aspect-[4/5] bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-6 flex flex-col items-center justify-between hover:border-gold transition-all duration-500 cursor-pointer">
+                <div class="w-12 h-12 mb-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                    <span class="font-serif text-2xl text-zinc-900 dark:text-white group-hover:text-gold transition-colors">A.B.</span>
+                </div>
+                <div class="text-center">
+                    <span class="text-[8px] uppercase tracking-widest text-gold font-bold block mb-1">Step 06</span>
+                    <h4 class="text-[11px] uppercase tracking-[0.2em] text-zinc-800 dark:text-white font-bold">Monogram</h4>
+                </div>
+                <div class="absolute top-3 right-3 w-2 h-2 rounded-full border border-gold group-hover:bg-gold transition-all"></div>
+            </div>
+
+        </div>
+
+        <div class="mt-12 p-8 bg-zinc-50 dark:bg-zinc-900/50 border border-dashed border-gray-200 dark:border-zinc-800 text-center">
+            <p class="text-[10px] uppercase tracking-[0.3em] text-zinc-400">Hover over a category to see available selections</p>
+        </div>
+    </div>
+</section>
+<section class="py-24 px-6 bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500 overflow-hidden">
+    <div class="max-w-[1024px] mx-auto">
+        
+        <div class="mb-20 text-center md:text-left">
+            <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold mb-4">The Artisan's Path</h2>
+            <h3 class="text-4xl md:text-5xl font-serif text-zinc-900 dark:text-white">From Thread to <span class="italic text-gold">Masterpiece.</span></h3>
+        </div>
+
+        <div class="relative grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-x-12 gap-y-20">
+            
+            <div class="group relative flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-1">
+                <div class="relative z-10 flex items-center justify-center w-12 h-12 bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-zinc-400 group-hover:text-gold group-hover:border-gold transition-colors duration-500">
+                    <span class="font-serif text-lg italic">01</span>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-[13px] uppercase tracking-[0.3em] font-bold text-zinc-900 dark:text-white group-hover:text-gold transition-colors">Consultation</h4>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-xs leading-relaxed font-light">
+                        Personal style discussion and curated fabric selection from the world’s finest mills.
+                    </p>
+                </div>
+                <div class="hidden lg:block absolute top-6 left-12 w-full h-[1px] bg-gray-100 dark:bg-zinc-800 -z-0"></div>
+            </div>
+
+            <div class="group relative flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-1">
+                <div class="relative z-10 flex items-center justify-center w-12 h-12 bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-zinc-400 group-hover:text-gold group-hover:border-gold transition-colors duration-500">
+                    <span class="font-serif text-lg italic">02</span>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-[13px] uppercase tracking-[0.3em] font-bold text-zinc-900 dark:text-white group-hover:text-gold transition-colors">Measurement</h4>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-xs leading-relaxed font-light">
+                        A detailed 30-point body analysis to ensure a blueprint that respects your unique posture.
+                    </p>
+                </div>
+                <div class="hidden lg:block absolute top-6 left-12 w-full h-[1px] bg-gray-100 dark:bg-zinc-800 -z-0"></div>
+            </div>
+
+            <div class="group relative flex flex-col items-start space-y-6 md:col-span-2 lg:col-span-1">
+                <div class="relative z-10 flex items-center justify-center w-12 h-12 bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-zinc-400 group-hover:text-gold group-hover:border-gold transition-colors duration-500">
+                    <span class="font-serif text-lg italic">03</span>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-[13px] uppercase tracking-[0.3em] font-bold text-zinc-900 dark:text-white group-hover:text-gold transition-colors">Crafting</h4>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-xs leading-relaxed font-light">
+                        Pattern drafting and hand-stitching begin, turning raw material into architectural form.
+                    </p>
+                </div>
+                <div class="hidden lg:block absolute top-6 left-12 w-full h-[1px] bg-gray-100 dark:bg-zinc-800 -z-0"></div>
+            </div>
+
+            <div class="group relative flex flex-col items-start space-y-6 md:col-span-3 lg:col-span-1 md:items-center lg:items-start text-center lg:text-left">
+                <div class="relative z-10 flex items-center justify-center w-12 h-12 bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-zinc-400 group-hover:text-gold group-hover:border-gold transition-colors duration-500">
+                    <span class="font-serif text-lg italic">04</span>
+                </div>
+                <div class="space-y-3 max-w-xs">
+                    <h4 class="text-[13px] uppercase tracking-[0.3em] font-bold text-zinc-900 dark:text-white group-hover:text-gold transition-colors">Fittings</h4>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-xs leading-relaxed font-light">
+                        Meticulous adjustments during live trials to achieve the legendary fit.
+                    </p>
+                </div>
+                <div class="hidden lg:block absolute top-6 left-12 w-full h-[1px] bg-gray-100 dark:bg-zinc-800 -z-0"></div>
+            </div>
+
+            <div class="group relative flex flex-col items-start space-y-6 md:col-span-3 lg:col-span-1 md:items-center lg:items-start text-center lg:text-left">
+                <div class="relative z-10 flex items-center justify-center w-12 h-12 bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-zinc-400 group-hover:text-gold group-hover:border-gold transition-colors duration-500">
+                    <span class="font-serif text-lg italic">05</span>
+                </div>
+                <div class="space-y-3 max-w-xs">
+                    <h4 class="text-[13px] uppercase tracking-[0.3em] font-bold text-zinc-900 dark:text-white group-hover:text-gold transition-colors">Final Delivery</h4>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-xs leading-relaxed font-light">
+                        Steam pressing and final presentation. Step out with a suit built for a lifetime.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-24 pt-12 border-t border-gray-100 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-8">
+            <p class="text-[10px] uppercase tracking-[0.3em] text-zinc-400 italic">Approximate timeline: 4–6 weeks.</p>
+            <button class="w-full sm:w-auto px-8 py-4 bg-zinc-900 dark:bg-gold text-white dark:text-black text-[9px] font-bold uppercase tracking-[0.4em] hover:bg-gold hover:text-white transition-all">
+                Download Process Guide
+            </button>
+        </div>
+    </div>
+</section>
+<section class="py-24 px-6 bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500 overflow-hidden relative">
+    
+    <div class="absolute inset-0 opacity-[0.05] pointer-events-none">
+        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0 50 Q 50 40 100 50" stroke="#C5A059" fill="transparent" stroke-width="0.2" stroke-dasharray="1 1" />
+        </svg>
+    </div>
+
+    <div class="max-w-[1024px] mx-auto relative z-10">
+        <div class="group relative bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-12 md:p-24 text-center shadow-[0_60px_100px_-20px_rgba(0,0,0,0.05)] transition-all duration-700 hover:shadow-2xl hover:-translate-y-2">
+            
+            <div class="absolute top-0 left-0 w-12 h-12 border-t border-l border-gold/20"></div>
+            <div class="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-gold/20"></div>
+
+            <div class="space-y-8">
+                <div class="inline-block">
+                    <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold mb-4">Your Journey Awaits</h2>
+                    <h3 class="text-4xl md:text-6xl font-serif text-zinc-900 dark:text-white leading-tight">
+                        Experience the <br> <span class="italic text-gold">Master's Touch.</span>
+                    </h3>
+                </div>
+
+                <p class="text-zinc-500 dark:text-zinc-400 text-sm md:text-lg font-light max-w-lg mx-auto leading-relaxed">
+                    Whether it's a milestone wedding or a corporate wardrobe update, your perfect fit is just a consultation away.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
+                    <a href="contact.html">
+                         <button class="relative overflow-hidden group/btn px-12 py-6 bg-zinc-950 dark:bg-gold text-white dark:text-zinc-950 text-[11px] font-bold uppercase tracking-[0.5em] transition-all hover:bg-gold dark:hover:bg-white hover:text-white active:scale-95 shadow-xl">
+                        <span class="relative z-10">Book Fitting</span>
+                        <div class="absolute inset-0 bg-white/10 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300"></div>
+                    </button>
+                    </a>
+                   
+
+                    <a href="tel:+123456789" class="group/link flex flex-col items-center">
+                        <span class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 group-hover/link:text-zinc-900 dark:group-hover/link:text-white transition-colors">Speak with a Tailor</span>
+                        <div class="w-0 h-[1px] bg-gold group-hover/link:w-full transition-all duration-500 mt-1"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-16 flex items-center justify-center gap-4 opacity-40">
+                <div class="w-8 h-[1px] bg-zinc-300"></div>
+                <p class="text-[8px] uppercase tracking-widest text-zinc-500">London • Dubai • New York</p>
+                <div class="w-8 h-[1px] bg-zinc-300"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+     <footer class="bg-gray-50 dark:bg-black pt-16 lg:pt-20 pb-10 px-6 border-t border-gray-200 dark:border-gray-800 transition-colors duration-500">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+            
+            <div class="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
+                <a href="index.html">
+                    <div class="flex flex-col leading-none">
+                    <span class="text-2xl font-serif font-bold tracking-[0.2em] text-gold uppercase">Stitch</span>
+                    <!-- <span class="text-[10px] uppercase tracking-[0.4em] opacity-60 dark:text-white">Bespoke</span> -->
+                </div>
+                </a>
+                
+                <p class="text-sm opacity-70 leading-relaxed max-w-xs">
+                    Mastering the art of bespoke tailoring since 1992. Every stitch tells a story of elegance and precision.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gold hover:text-white hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gold hover:text-white hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-facebook-f text-base"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gold hover:text-white hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-bold uppercase tracking-[0.2em] mb-6 text-xs text-gold">Explore</h4>
+                <ul class="space-y-4 text-sm opacity-80 text-center md:text-left">
+                    <li><a href="index.html" class="hover:text-gold transition-colors block">Home</a></li>
+                    <li><a href="about.html" class="hover:text-gold transition-colors block">About Us</a></li>
+                    <li><a href="service.html" class="hover:text-gold transition-colors block">Services</a></li>
+                    <li><a href="404.html" class="text-red-500/80 hover:text-red-500 transition-colors block">404 Page</a></li>
+                    <li><a href="comingsoon.html" class="hover:text-gold transition-colors block">Coming Soon</a></li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-bold uppercase tracking-[0.2em] mb-6 text-xs text-gold">Services</h4>
+                <ul class="space-y-4 text-sm opacity-80 text-center md:text-left">
+                    <li><a href="home2.html" class="hover:text-gold transition-colors block">Home2</a></li>
+                    <li><a href="contact.html" class="hover:text-gold transition-colors block">Contact Us</a></li>
+                    <li><a href="booknow.html" class="hover:text-gold transition-colors block">Book Now</a></li>
+                    <li><a href="gallery.html" class="hover:text-gold transition-colors block">Gallery</a></li>
+                    <li><a href="user.html" class="hover:text-gold transition-colors block">User Dashboard</a></li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-bold uppercase tracking-[0.2em] mb-6 text-xs text-gold text-center md:text-left">Stay Informed</h4>
+                <p class="text-xs opacity-70 mb-6 text-center md:text-left">Subscribe to receive style guides and exclusive fabric launch alerts.</p>
+                <div class="relative w-full max-w-sm">
+                    <input type="email" placeholder="Email Address" 
+                        class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 pr-12 lg:pr-32 focus:outline-none focus:border-gold transition-all text-sm rounded-sm">
+                    <button class="absolute right-2 top-2 bottom-2 bg-gold text-white px-4 lg:px-6 font-bold uppercase text-[10px] tracking-widest hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all">
+                        <span class="hidden lg:inline">Subscribe</span>
+                        <i class="fa-solid fa-paper-plane lg:hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center pt-10 border-t border-gray-200 dark:border-gray-800">
+            <p class="text-[9px] lg:text-[10px] uppercase tracking-[0.3em] opacity-50 dark:text-white">
+                &copy; 2026 Stitch & Style Bespoke. Crafted with Passion.
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        const root = document.getElementById('root-html');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarContent = document.getElementById('sidebar-content');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        // Sidebar Interaction
+        document.getElementById('menu-open').onclick = () => {
+            sidebar.classList.remove('invisible');
+            setTimeout(() => {
+                sidebarContent.classList.remove('translate-x-full');
+                sidebarOverlay.classList.replace('opacity-0', 'opacity-100');
+            }, 10);
+        };
+
+        const closeMenu = () => {
+            sidebarContent.classList.add('translate-x-full');
+            sidebarOverlay.classList.replace('opacity-100', 'opacity-0');
+            setTimeout(() => sidebar.classList.add('invisible'), 300);
+        };
+
+        document.getElementById('menu-close').onclick = closeMenu;
+        sidebarOverlay.onclick = closeMenu;
+
+        // Theme Toggle
+        function toggleTheme() {
+            root.classList.toggle('dark');
+            localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Direction Toggle
+        function toggleDirection() {
+            const isRtl = root.getAttribute('dir') === 'rtl';
+            const newDir = isRtl ? 'ltr' : 'rtl';
+            root.setAttribute('dir', newDir);
+            localStorage.setItem('dir', newDir);
+            document.getElementById('dir-label').innerText = newDir.toUpperCase();
+            document.getElementById('dir-label-mobile').innerText = newDir.toUpperCase();
+        }
+
+        // Init
+        if (localStorage.theme === 'dark') root.classList.add('dark');
+        if (localStorage.dir) {
+            root.setAttribute('dir', localStorage.dir);
+            document.getElementById('dir-label').innerText = localStorage.dir.toUpperCase();
+        }
+    </script>
+</body>
+</html>

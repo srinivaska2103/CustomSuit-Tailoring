@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { gold: '#C5A059' }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        *, *::before, *::after {
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        color 0.3s ease;
+        }
+
+        body { font-family: 'Inter', sans-serif; height: 100vh; overflow: hidden; margin: 0; }
+        .serif { font-family: 'Bodoni Moda', serif; }
+
+        /* Sidebar State Logic */
+        .sidebar-hidden-ltr { transform: translateX(-100%); }
+        .sidebar-hidden-rtl { transform: translateX(100%); }
+        .sidebar-visible { transform: translateX(0) !important; }
+
+        /* Desktop Override */
+        @media (min-width: 1024px) {
+            .lg-static-sidebar {
+                transform: translateX(0) !important;
+                position: static !important;
+            }
+        }
+
+        .active-tab { 
+            color: #C5A059 !important; 
+            background: rgba(197, 160, 89, 0.08);
+            border-inline-start: 4px solid #C5A059;
+        }
+
+        #overlay.active { opacity: 1; visibility: visible; }
+        .visibility-hidden { visibility: hidden; }
+        
+        /* Custom Scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+    <script>
+    // Immediate Theme Check
+    if (localStorage.getItem('atelier_theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+    }
+    // Immediate Direction Check
+    if (localStorage.getItem('atelier_dir')) {
+        document.documentElement.dir = localStorage.getItem('atelier_dir');
+    }
+</script>
+</head>
+
+<body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-500">
+
+    <div id="overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55] opacity-0 visibility-hidden transition-all duration-300 lg:hidden"></div>
+
+    <div class="flex h-full overflow-hidden">
+        
+        <aside id="sidebar" class="fixed inset-y-0 z-[60] w-72 bg-white dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-800 transition-transform duration-500 ease-in-out lg-static-sidebar sidebar-hidden-ltr">
+            <div class="p-8 h-full flex flex-col">
+                <a href="index.html">
+             <div class="flex flex-col leading-none flex-shrink-0">
+            <span class="text-xl lg:text-2xl font-serif font-bold tracking-[0.15em] lg:tracking-[0.2em] text-gold">STITCH</span>
+           
+        </div>
+        </a>
+        <br>
+
+
+                <nav class="space-y-1 flex-grow overflow-y-auto no-scrollbar">
+                    <button onclick="switchTab(this, 'overview')" class="tab-link active-tab w-full flex items-center gap-4 px-6 py-4 text-[11px] uppercase tracking-widest font-bold text-left transition-colors">
+                        Overview
+                    </button>
+                    <button onclick="switchTab(this, 'details')" class="tab-link w-full flex items-center gap-4 px-6 py-4 text-[11px] uppercase tracking-widest font-bold text-zinc-400 hover:text-gold text-left transition-colors">
+                        Project Details
+                    </button>
+                    <button onclick="switchTab(this, 'history')" class="tab-link w-full flex items-center gap-4 px-6 py-4 text-[11px] uppercase tracking-widest font-bold text-zinc-400 hover:text-gold text-left transition-colors">
+                        Order History
+                    </button>
+                    <button onclick="switchTab(this, 'settings')" class="tab-link w-full flex items-center gap-4 px-6 py-4 text-[11px] uppercase tracking-widest font-bold text-zinc-400 hover:text-gold text-left transition-colors">
+                        Account Settings
+                    </button>
+                </nav>
+
+                <div class="pt-6 border-t border-zinc-100 dark:border-zinc-800 space-y-4">
+                    <div class="flex items-center justify-between p-2">
+                        <span class="text-[10px] uppercase tracking-widest font-bold text-zinc-500">Theme</span>
+                        <button id="themeToggle" class="relative w-12 h-6 bg-zinc-200 dark:bg-zinc-700 rounded-full p-1 cursor-pointer">
+                            <div class="toggle-dot absolute top-1 left-1 dark:left-7 w-4 h-4 bg-white dark:bg-gold rounded-full shadow transition-all duration-300"></div>
+                        </button>
+                    </div>
+                    <button id="langToggle" class="w-full py-3 bg-zinc-50 dark:bg-zinc-800/50 text-gold text-[10px] font-bold uppercase tracking-widest hover:opacity-80 transition-opacity">
+                        Layout: <span id="langLabel">LTR</span>
+                    </button>
+                    <button onclick="handleLogout()" class="w-full py-3 text-red-500 text-[10px] font-bold uppercase tracking-widest hover:bg-red-50 dark:hover:bg-red-900/10 transition-all">
+                        Sign Out
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+            
+            <header class="lg:hidden flex items-center justify-between p-4 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-50">
+                <button id="menuBtn" class="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <span class="serif italic text-xl">Atelier</span>
+                <div class="w-8 h-8 rounded-full bg-gold/10 text-gold flex items-center justify-center text-xs font-bold border border-gold/20">JD</div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-6 md:p-10 lg:p-16 scroll-smooth">
+                
+                <div id="overview" class="tab-content max-w-6xl mx-auto space-y-10 animate-in fade-in duration-700">
+                    <section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                        <div class="space-y-2">
+                            <h4 class="text-gold text-[10px] uppercase tracking-[0.4em] font-bold">Client Member Since 2024</h4>
+                            <h2 class="serif text-4xl md:text-6xl text-zinc-900 dark:text-zinc-50">Bonjour, <span class="italic">Alexander</span></h2>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="px-4 py-2 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest rounded-full border border-emerald-500/20 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> System Online
+                            </span>
+                        </div>
+                    </section>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="p-8 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl relative overflow-hidden group">
+                            <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Active Project</p>
+                            <p class="serif text-3xl mt-2 text-zinc-800 dark:text-zinc-100 italic leading-tight">Velvet Evening Jacket</p>
+                            <div class="mt-8">
+                                <div class="flex justify-between text-[10px] mb-2 font-bold uppercase">
+                                    <span>Crafting Progress</span>
+                                    <span class="text-gold">75%</span>
+                                </div>
+                                <div class="h-1 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gold w-[75%]"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-8 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl">
+                            <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Style Silhouette</p>
+                            <p class="serif text-3xl mt-2 text-zinc-800 dark:text-zinc-100 leading-tight">Slim Florentine</p>
+                            <div class="mt-6 flex flex-wrap gap-2">
+                                <span class="text-[9px] px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded text-zinc-500 dark:text-zinc-400 uppercase font-bold">Wide Lapel</span>
+                                <span class="text-[9px] px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded text-zinc-500 dark:text-zinc-400 uppercase font-bold">Natural Shoulder</span>
+                            </div>
+                        </div>
+
+                        <button class="md:col-span-2 lg:col-span-1 p-8 bg-zinc-900 dark:bg-gold text-white dark:text-zinc-950 rounded-2xl flex flex-col justify-between group transition-transform hover:scale-[1.01]">
+                            <div>
+                                <p class="text-[10px] opacity-70 font-bold uppercase tracking-widest">Next Fitting</p>
+                                <p class="serif text-4xl mt-2 font-bold italic">March 12</p>
+                                <p class="text-[11px] mt-1 opacity-80 uppercase tracking-widest">London Studio • 14:30</p>
+                            </div>
+                            <div class="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest mt-8 group-hover:gap-4 transition-all">
+                                Book Consultation <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 p-8 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
+                            <div class="flex items-center justify-between mb-8">
+                                <h3 class="serif text-2xl">Anatomical Profile</h3>
+                                <button class="text-[10px] text-gold font-bold uppercase tracking-widest">Update</button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left">
+                                    <tbody class="text-sm">
+                                        <tr class="border-b border-zinc-50 dark:border-zinc-800/50">
+                                            <td class="py-5 text-zinc-500 uppercase text-[10px] font-bold">Chest</td>
+                                            <td class="py-5 serif italic text-xl">104.5 cm</td>
+                                            <td class="py-5 text-emerald-500 text-xs font-bold">+0.2</td>
+                                        </tr>
+                                        <tr class="border-b border-zinc-50 dark:border-zinc-800/50">
+                                            <td class="py-5 text-zinc-500 uppercase text-[10px] font-bold">Sleeve</td>
+                                            <td class="py-5 serif italic text-xl">64.0 cm</td>
+                                            <td class="py-5 text-zinc-400 text-xs font-bold">Stable</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="p-8 bg-zinc-100/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl">
+                            <h3 class="serif text-2xl mb-8">Timeline</h3>
+                            <div class="space-y-8 relative before:absolute before:left-2 before:top-2 before:bottom-2 before:w-px before:bg-zinc-200 dark:before:bg-zinc-800">
+                                <div class="relative pl-8">
+                                    <div class="absolute left-0 top-1 w-4 h-4 rounded-full bg-gold border-4 border-zinc-50 dark:border-zinc-900"></div>
+                                    <p class="text-[10px] text-zinc-400 font-bold uppercase">Today</p>
+                                    <p class="text-xs mt-1 leading-relaxed">Fabric selection finalized: Loro Piana S'150</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="details" class="tab-content hidden max-w-6xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <section class="border-b border-zinc-200 dark:border-zinc-800 pb-8 flex flex-col md:flex-row justify-between items-end gap-4">
+                        <div>
+                            <h4 class="text-gold text-[10px] uppercase font-bold tracking-widest mb-2">Ref: #ATM-7721</h4>
+                            <h2 class="serif text-4xl md:text-5xl italic text-zinc-900 dark:text-zinc-50">Technical Specifications</h2>
+                        </div>
+                        <button class="px-6 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-[10px] font-bold uppercase tracking-widest">Download PDF</button>
+                    </section>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-8 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl">
+                             <h3 class="serif text-xl mb-6">Fabric Analysis</h3>
+                             <div class="space-y-4 text-sm">
+                                <div class="flex justify-between border-b border-zinc-50 dark:border-zinc-800 pb-2">
+                                    <span class="text-zinc-400 text-[10px] font-bold uppercase">Supplier</span>
+                                    <span>Loro Piana</span>
+                                </div>
+                                <div class="flex justify-between border-b border-zinc-50 dark:border-zinc-800 pb-2">
+                                    <span class="text-zinc-400 text-[10px] font-bold uppercase">Weight</span>
+                                    <span>280g / mt</span>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="md:col-span-2 min-h-[400px] border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-3xl flex items-center justify-center">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-10.5v10.5"/></svg>
+                                </div>
+                                <p class="serif text-2xl italic">Blueprint Viewer</p>
+                                <p class="text-xs text-zinc-400 mt-2">Initialize 3D Silhouette</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<div id="history" class="tab-content hidden max-w-6xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    
+    <section class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-zinc-200 dark:border-zinc-800 pb-8">
+        <div>
+            <h2 class="serif text-4xl md:text-5xl text-zinc-900 dark:text-zinc-50">Commission <span class="italic">Archive</span></h2>
+            <p class="text-[10px] uppercase tracking-widest text-zinc-400 mt-2 font-bold font-sans">Lifetime Sartorial Records</p>
+        </div>
+        
+        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 md:pb-0">
+            <button class="px-4 py-2 rounded-full bg-gold text-white text-[10px] font-bold uppercase tracking-widest">All</button>
+            <button class="px-4 py-2 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-400 text-[10px] font-bold uppercase tracking-widest hover:border-gold transition-colors">Suits</button>
+            <button class="px-4 py-2 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-400 text-[10px] font-bold uppercase tracking-widest hover:border-gold transition-colors">Outerwear</button>
+        </div>
+    </section>
+
+    <div class="space-y-4">
+        
+        <div class="group relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 md:p-8 rounded-2xl transition-all hover:shadow-xl hover:border-gold/30">
+            <div class="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
+                <div class="lg:w-32">
+                    <p class="text-[10px] font-bold text-gold uppercase tracking-tighter">Oct 2025</p>
+                    <p class="text-[11px] text-zinc-400 font-mono mt-1">#ORD-9902</p>
+                </div>
+                
+                <div class="flex-grow">
+                    <h3 class="serif text-2xl text-zinc-800 dark:text-zinc-100 italic">Midnight Silk-Wool Tuxedo</h3>
+                    <p class="text-xs text-zinc-500 mt-1">Three-piece • Peak Lapel • Grosgrain Facing</p>
+                </div>
+
+                <div class="flex items-center justify-between lg:justify-end gap-8 lg:w-64 border-t lg:border-t-0 border-zinc-100 dark:border-zinc-800 pt-4 lg:pt-0">
+                    <div class="text-right">
+                        <p class="text-[10px] text-zinc-400 uppercase font-bold">Investment</p>
+                        <p class="serif text-lg text-zinc-800 dark:text-zinc-200">£4,250</p>
+                    </div>
+                    <span class="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 text-[9px] font-bold uppercase tracking-widest rounded">Delivered</span>
+                </div>
+                
+                <div class="hidden lg:block">
+                    <button class="p-3 rounded-full border border-zinc-100 dark:border-zinc-800 hover:bg-gold hover:text-white transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="group relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 md:p-8 rounded-2xl transition-all hover:border-gold/30">
+            <div class="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 opacity-70 group-hover:opacity-100 transition-opacity">
+                <div class="lg:w-32">
+                    <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-tighter">May 2025</p>
+                    <p class="text-[11px] text-zinc-400 font-mono mt-1">#ORD-8114</p>
+                </div>
+                
+                <div class="flex-grow">
+                    <h3 class="serif text-2xl text-zinc-800 dark:text-zinc-100 italic">Vicuna Blend Overcoat</h3>
+                    <p class="text-xs text-zinc-500 mt-1">Double Breasted • Hand-stitched Edges</p>
+                </div>
+
+                <div class="flex items-center justify-between lg:justify-end gap-8 lg:w-64 border-t lg:border-t-0 border-zinc-100 dark:border-zinc-800 pt-4 lg:pt-0">
+                    <div class="text-right">
+                        <p class="text-[10px] text-zinc-400 uppercase font-bold">Investment</p>
+                        <p class="serif text-lg text-zinc-800 dark:text-zinc-200">£8,900</p>
+                    </div>
+                    <span class="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 text-[9px] font-bold uppercase tracking-widest rounded">Archived</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="pt-12 text-center">
+        <div class="inline-block p-1 border-b border-gold/20">
+            <button class="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 hover:text-gold transition-colors">
+                Load Full History (2018—2024)
+            </button>
+        </div>
+    </div>
+</div>              
+<div id="settings" class="tab-content hidden max-w-6xl mx-auto space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-20">
+    
+    <section class="border-b border-zinc-200 dark:border-zinc-800 pb-8">
+        <h2 class="serif text-4xl md:text-5xl text-zinc-900 dark:text-zinc-50">Client <span class="italic">Preferences</span></h2>
+        <p class="text-[10px] uppercase tracking-[0.4em] text-zinc-400 mt-2 font-bold">Personal Parameters & Security</p>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        
+        <div class="lg:col-span-2 space-y-12">
+            
+            <div class="space-y-6">
+                <h3 class="serif text-2xl text-zinc-800 dark:text-zinc-200">Identity</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="group">
+                        <label class="text-[10px] uppercase font-bold text-zinc-400 tracking-widest block mb-2 transition-colors group-focus-within:text-gold">Legal Name</label>
+                        <input type="text" value="Alexander Dumas" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 focus:border-gold outline-none text-zinc-800 dark:text-zinc-100 transition-all font-light italic text-lg">
+                    </div>
+                    <div class="group">
+                        <label class="text-[10px] uppercase font-bold text-zinc-400 tracking-widest block mb-2 transition-colors group-focus-within:text-gold">Email Address</label>
+                        <input type="email" value="a.dumas@atelier.com" class="w-full bg-transparent border-b border-zinc-200 dark:border-zinc-800 py-3 focus:border-gold outline-none text-zinc-800 dark:text-zinc-100 transition-all font-light text-lg">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 pt-6">
+                <h3 class="serif text-2xl text-zinc-800 dark:text-zinc-200">Communication</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-xl">
+                        <div>
+                            <p class="text-sm font-bold text-zinc-700 dark:text-zinc-300">Fitting Reminders</p>
+                            <p class="text-[11px] text-zinc-400 uppercase tracking-widest mt-1">SMS & Push Notifications</p>
+                        </div>
+                        <button onclick="this.classList.toggle('bg-gold'); this.firstElementChild.classList.toggle('translate-x-6')" class="w-12 h-6 bg-zinc-200 dark:bg-zinc-700 rounded-full p-1 transition-colors duration-300 flex items-center">
+                            <div class="w-4 h-4 bg-white rounded-full shadow transition-transform duration-300"></div>
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 rounded-xl">
+                        <div>
+                            <p class="text-sm font-bold text-zinc-700 dark:text-zinc-300">New Collection Access</p>
+                            <p class="text-[11px] text-zinc-400 uppercase tracking-widest mt-1">Early fabric reveals</p>
+                        </div>
+                        <button onclick="this.classList.toggle('bg-gold'); this.firstElementChild.classList.toggle('translate-x-6')" class="w-12 h-6 bg-gold rounded-full p-1 transition-colors duration-300 flex items-center">
+                            <div class="w-4 h-4 bg-white rounded-full shadow translate-x-6 transition-transform duration-300"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-10 border-t border-zinc-200 dark:border-zinc-800">
+                <button class="text-[10px] font-bold uppercase tracking-widest text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 px-4 py-2 rounded transition-colors">Deactivate Member Profile</button>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="p-8 bg-zinc-900 dark:bg-zinc-100 rounded-2xl text-white dark:text-zinc-900">
+                <p class="text-[10px] uppercase font-bold tracking-widest opacity-60">Profile Completion</p>
+                <p class="serif text-5xl mt-4 italic">85%</p>
+                <div class="mt-8 space-y-3">
+                    <p class="text-[10px] uppercase font-bold flex items-center gap-2">
+                        <svg class="w-3 h-3 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                        Identity Verified
+                    </p>
+                    <p class="text-[10px] uppercase font-bold flex items-center gap-2 opacity-40">
+                        <span class="w-3 h-3 border border-current rounded-full"></span>
+                        Missing Fit Preferences
+                    </p>
+                </div>
+            </div>
+
+            <button class="w-full bg-gold text-white py-4 text-[10px] font-bold uppercase tracking-[0.3em] hover:opacity-90 transition-opacity shadow-lg shadow-gold/20">
+                Save All Changes
+            </button>
+        </div>
+    </div>
+</div>
+            </main>
+        </div>
+    </div>
+    <script>
+    // --- 1. CORE UTILITIES ---
+    // const $ = (id) => document.getElementById(id);
+    // const html = document.documentElement;
+
+    const Atelier = {
+        save: (key, val) => localStorage.setItem(`atelier_${key}`, val),
+        get: (key) => localStorage.getItem(`atelier_${key}`),
+        
+        // Sync Theme (Dark/Light)
+        applyTheme: (theme) => {
+            const selected = theme || Atelier.get('theme') || 'light';
+            if (selected === 'dark') {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+            Atelier.save('theme', selected);
+        },
+
+        // Sync Direction (LTR/RTL)
+        applyLayout: (dir) => {
+            const selected = dir || Atelier.get('dir') || 'ltr';
+            html.dir = selected;
+            const label = $('langLabel');
+            if (label) label.innerText = selected.toUpperCase();
+            
+            const sidebar = $('sidebar');
+            if (sidebar) {
+                sidebar.classList.remove('sidebar-hidden-ltr', 'sidebar-hidden-rtl');
+                sidebar.classList.add(selected === 'rtl' ? 'sidebar-hidden-rtl' : 'sidebar-hidden-ltr');
+            }
+            Atelier.save('dir', selected);
+        },
+
+        // Sync Active Tab across sessions
+        syncTabs: (targetId) => {
+            const id = targetId || Atelier.get('active_tab') || 'home';
+            
+            // 1. Hide all sections
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            
+            // 2. Show the saved/clicked section
+            const section = $(id);
+            if (section) section.classList.remove('hidden');
+
+            // 3. Highlight ALL nav links pointing to this ID (Global Nav + Sidebar)
+            document.querySelectorAll(`[onclick*="'${id}'"]`).forEach(btn => {
+                btn.classList.add('text-gold', 'active-tab');
+                // If it's a sidebar item, add a background highlight
+                if(btn.classList.contains('sidebar-link')) btn.classList.add('bg-zinc-100', 'dark:bg-zinc-800');
+            });
+
+            Atelier.save('active_tab', id);
+        }
+    };
+
+    // --- 2. EVENT LISTENERS ---
+    
+    // Theme Toggle
+    if ($('themeToggle')) {
+        $('themeToggle').addEventListener('click', () => {
+            const next = html.classList.contains('dark') ? 'light' : 'dark';
+            Atelier.applyTheme(next);
+        });
+    }
+
+    // Language Toggle
+    if ($('langToggle')) {
+        $('langToggle').addEventListener('click', () => {
+            const next = html.dir === 'ltr' ? 'rtl' : 'ltr';
+            Atelier.applyLayout(next);
+        });
+    }
+
+    // The Global Switch function (Used in HTML)
+    function switchTab(btn, id) {
+        // Clear all active styles first
+        document.querySelectorAll('.tab-link, [onclick*="switchTab"]').forEach(l => {
+            l.classList.remove('text-gold', 'active-tab', 'bg-zinc-100', 'dark:bg-zinc-800');
+        });
+        Atelier.syncTabs(id);
+
+        // Sidebar Auto-Close for mobile
+        const sidebar = $('sidebar');
+        if (sidebar && window.innerWidth < 1024 && sidebar.classList.contains('sidebar-visible')) {
+            toggleSidebar();
+        }
+    }
+
+    // --- 3. INITIALIZE ON LOAD ---
+    window.addEventListener('DOMContentLoaded', () => {
+        Atelier.applyTheme();
+        Atelier.applyLayout();
+        Atelier.syncTabs();
+    });
+</script>
+    <script>
+    // Helper to select elements safely
+    // const $ = (id) => document.getElementById(id);
+    // const html = document.documentElement;
+
+    // --- 1. STORAGE ENGINE ---
+    // const store = (key, value) => {
+    //     localStorage.setItem(`atelier-${key}`, value);
+    //     console.log(`Saved: ${key} = ${value}`);
+    // };
+    // const get = (key) => localStorage.getItem(`atelier-${key}`);
+
+    // --- 2. THEME ENGINE ---
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+        store('theme', theme);
+    }
+
+    // const themeBtn = $('themeToggle');
+    // if (themeBtn) {
+    //     themeBtn.addEventListener('click', () => {
+    //         const current = html.classList.contains('dark') ? 'light' : 'dark';
+    //         applyTheme(current);
+    //     });
+    // }
+
+    // --- 3. TAB & NAVIGATION ENGINE ---
+    function switchTab(btn, id) {
+        if (!id) return;
+
+        // Hide all content
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        
+        // Remove active classes from ALL potential links
+        document.querySelectorAll('.tab-link, [onclick*="switchTab"]').forEach(l => {
+            l.classList.remove('active-tab', 'text-gold', 'border-gold', 'bg-zinc-100', 'dark:bg-zinc-800');
+        });
+        
+        // Show the target section
+        const target = $(id);
+        if (target) {
+            target.classList.remove('hidden');
+            store('active-tab', id); 
+        }
+
+        // Highlight every button that refers to this ID (Sidebar + Header)
+        const allMatchingBtns = document.querySelectorAll(`[onclick*="'${id}'"], [onclick*=' "${id}" ']`);
+        allMatchingBtns.forEach(match => {
+            match.classList.add('active-tab', 'text-gold');
+        });
+
+        // Close sidebar if mobile
+        const sidebar = $('sidebar');
+        if (sidebar && window.innerWidth < 1024 && sidebar.classList.contains('sidebar-visible')) {
+            toggleSidebar();
+        }
+    }
+
+    // --- 4. DIRECTION ENGINE (LTR/RTL) ---
+    function applyLayout(dir) {
+        html.dir = dir || 'ltr';
+        const langLabel = $('langLabel');
+        if (langLabel) langLabel.innerText = html.dir.toUpperCase();
+        store('dir', html.dir);
+        
+        const sidebar = $('sidebar');
+        if (sidebar) {
+            sidebar.classList.remove('sidebar-hidden-ltr', 'sidebar-hidden-rtl');
+            sidebar.classList.add(html.dir === 'rtl' ? 'sidebar-hidden-rtl' : 'sidebar-hidden-ltr');
+        }
+    }
+
+    const langBtn = $('langToggle');
+    if (langBtn) {
+        langBtn.addEventListener('click', () => {
+            const newDir = html.dir === 'ltr' ? 'rtl' : 'ltr';
+            applyLayout(newDir);
+        });
+    }
+
+    // --- 5. SIDEBAR TOGGLE ---
+    function toggleSidebar() {
+        const sidebar = $('sidebar');
+        const overlay = $('overlay');
+        if (sidebar && overlay) {
+            sidebar.classList.toggle('sidebar-visible');
+            overlay.classList.toggle('active');
+            overlay.classList.toggle('visibility-hidden');
+        }
+    }
+
+    const menuBtn = $('menuBtn');
+    if (menuBtn) menuBtn.addEventListener('click', toggleSidebar);
+    
+    // const overlay = $('overlay');
+    // if (overlay) overlay.addEventListener('click', toggleSidebar);
+
+    // --- 6. INITIALIZATION ---
+    window.addEventListener('DOMContentLoaded', () => {
+        console.log("Atelier System Initializing...");
+
+        // Load Theme
+        applyTheme(get('theme') || 'light');
+
+        // Load Direction
+        applyLayout(get('dir') || 'ltr');
+
+        // Load Active Tab
+        const savedTab = get('active-tab') || 'home'; 
+        // Find a button to "click" to restore state
+        const activeBtn = document.querySelector(`[onclick*="'${savedTab}'"]`);
+        switchTab(activeBtn, savedTab);
+    });
+</script>
+<script>
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const langLabel = document.getElementById('langLabel');
+
+    // --- 1. PERSISTENCE HELPERS ---
+    // Using a prefix to avoid clashing with other site data
+    const store = (key, value) => localStorage.setItem(`atelier-${key}`, value);
+    const get = (key) => localStorage.getItem(`atelier-${key}`);
+
+    // --- 2. THEME LOGIC (Dark/Light) ---
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+        store('theme', theme);
+        // Optional: Update theme button icon/text here
+    }
+
+    themeBtn.addEventListener('click', () => {
+        const current = html.classList.contains('dark') ? 'light' : 'dark';
+        applyTheme(current);
+    });
+      // Init
+        if (localStorage.theme === 'dark') root.classList.add('dark');
+        if (localStorage.dir) {
+            root.setAttribute('dir', localStorage.dir);
+            document.getElementById('dir-label').innerText = localStorage.dir.toUpperCase();
+        }
+
+    // --- 3. TAB & NAV PERSISTENCE ---
+    function switchTab(btn, id) {
+        // 1. Hide all content sections
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        
+        // 2. Clear active styles from ALL nav links (Sidebar & Navbar)
+        document.querySelectorAll('.tab-link, [onclick*="switchTab"]').forEach(l => {
+            l.classList.remove('active-tab', 'text-gold', 'border-gold', 'bg-zinc-100', 'dark:bg-zinc-800');
+        });
+        
+        // 3. Show target content
+        const target = document.getElementById(id);
+        if (target) {
+            target.classList.remove('hidden');
+            store('active-tab', id); 
+        }
+
+        // 4. Highlight the clicked button (and any duplicates of it)
+        const allMatchingBtns = document.querySelectorAll(`[onclick*="'${id}'"]`);
+        allMatchingBtns.forEach(match => {
+            match.classList.add('active-tab', 'text-gold');
+            // If it's a sidebar link, maybe add a background
+            if(match.classList.contains('sidebar-link')) {
+                match.classList.add('bg-zinc-100', 'dark:bg-zinc-800');
+            }
+        });
+
+        // 5. Close sidebar on mobile
+        if (window.innerWidth < 1024 && sidebar.classList.contains('sidebar-visible')) {
+            toggleSidebar();
+        }
+    }
+
+    // --- 4. LAYOUT DIRECTION (LTR/RTL) ---
+    function applyLayout(dir) {
+        html.dir = dir;
+        if (langLabel) langLabel.innerText = dir.toUpperCase();
+        store('dir', dir);
+        
+        // Correctly handle Sidebar positioning classes
+        if (dir === 'rtl') {
+            sidebar.classList.remove('sidebar-hidden-ltr');
+            sidebar.classList.add('sidebar-hidden-rtl');
+        } else {
+            sidebar.classList.remove('sidebar-hidden-rtl');
+            sidebar.classList.add('sidebar-hidden-ltr');
+        }
+    }
+
+    document.getElementById('langToggle').addEventListener('click', () => {
+        const newDir = html.dir === 'ltr' ? 'rtl' : 'ltr';
+        applyLayout(newDir);
+    });
+
+    // --- 5. SIDEBAR TOGGLE ---
+    function toggleSidebar() {
+        sidebar.classList.toggle('sidebar-visible');
+        overlay.classList.toggle('active');
+        overlay.classList.toggle('visibility-hidden');
+    }
+
+    if(document.getElementById('menuBtn')) {
+        document.getElementById('menuBtn').addEventListener('click', toggleSidebar);
+    }
+    overlay.addEventListener('click', toggleSidebar);
+
+    // --- 6. INITIALIZATION (The Sync) ---
+    window.addEventListener('DOMContentLoaded', () => {
+        // Init Theme
+        const savedTheme = get('theme') || 'light';
+        applyTheme(savedTheme);
+
+        // Init Direction
+        const savedDir = get('dir') || 'ltr';
+        applyLayout(savedDir);
+
+        // Init Active Tab
+        const savedTab = get('active-tab') || 'home'; 
+        // Find the button that controls this tab to trigger the visual styles
+        const activeBtn = document.querySelector(`[onclick*="'${savedTab}'"]`);
+        switchTab(activeBtn, savedTab);
+    });
+
+    // --- 7. LOGOUT ---
+    function handleLogout() {
+        if(confirm("Confirm Logout?")) {
+            localStorage.clear(); 
+            window.location.reload();
+        }
+    }
+</script>
+</body>
+</html>

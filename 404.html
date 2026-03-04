@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="root-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Pattern Lost</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:italic,wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { gold: '#C5A059' }, fontFamily: { serif: ['Cormorant Garamond', 'serif'], sans: ['Montserrat', 'sans-serif'] } } } }
+    </script>
+</head>
+<body class="bg-[#FCFBFA] dark:bg-zinc-950 font-sans transition-colors duration-500 overflow-hidden">
+
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center max-w-[1024px] left-1/2 -translate-x-1/2">
+        <a href="index.html" class="text-2xl font-serif font-bold tracking-[0.2em] text-gold uppercase">STITCH<span class="text-gold">.</span></a>
+        <div class="flex items-center gap-3">
+            <button onclick="toggleDirection()" class="w-10 h-10 rounded-full border border-gray-200 dark:border-zinc-800 flex items-center justify-center text-[10px] font-bold text-gray-600 dark:text-gray-400"> <span id="dir-text">LTR</span> </button>
+            <button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-gray-600 dark:text-gold"> <i id="theme-icon" class="fa-solid fa-moon"></i> </button>
+        </div>
+    </nav>
+
+    <main class="min-h-screen flex items-center justify-center p-6 relative">
+        <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] dark:opacity-[0.05] pointer-events-none">
+            <h1 class="text-[20rem] lg:text-[40rem] font-serif font-bold">404</h1>
+        </div>
+
+        <div class="w-full max-w-[1024px] grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="hidden lg:block aspect-[4/5] relative">
+                <div class="absolute inset-0 border border-gold/20 flex items-center justify-center">
+                    <div class="w-32 h-32 border-l border-t border-gold rotate-45 opacity-30"></div>
+                </div>
+                <div class="absolute inset-10 border border-gold/10"></div>
+                <div class="absolute bottom-10 right-10 bg-white dark:bg-zinc-900 p-8 shadow-2xl border border-gray-100 dark:border-zinc-800">
+                    <p class="text-[10px] uppercase tracking-widest font-bold text-[#C5A059]">Out of Alignment</p>
+                    <p class="text-2xl font-serif text-gray-900 dark:text-white">Pattern Missing</p>
+                </div>
+            </div>
+
+            <div class="text-center lg:text-left space-y-8">
+                <h2 class="text-gold uppercase tracking-[0.4em] text-[10px] font-bold">Error</h2>
+                <h3 class="text-6xl md:text-8xl font-serif text-gray-900 dark:text-white leading-none">Lost in <br> <span class="italic text-gold">Tailoring.</span></h3>
+                <p class="text-gray-500 dark:text-zinc-400 text-lg font-light max-w-sm mx-auto lg:mx-0">The measurement or page you requested does not exist in our current pattern collection.</p>
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                    <a href="index.html" class="px-12 py-5 bg-gray-900 dark:bg-gold text-white dark:text-zinc-950 text-[10px] font-bold uppercase tracking-widest shadow-xl">Return to Home</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const html = document.documentElement;
+        function updateUI() {
+            document.getElementById('theme-icon').className = html.classList.contains('dark') ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            document.getElementById('dir-text').innerText = html.dir === 'rtl' ? 'RTL' : 'LTR';
+        }
+        function toggleTheme() {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            updateUI();
+        }
+        function toggleDirection() {
+            html.dir = html.dir === 'ltr' ? 'rtl' : 'ltr';
+            localStorage.setItem('dir', html.dir);
+            updateUI();
+        }
+        if(localStorage.getItem('theme') === 'dark') html.classList.add('dark');
+        if(localStorage.getItem('dir')) html.dir = localStorage.getItem('dir');
+        updateUI();
+    </script>
+</body>
+</html>

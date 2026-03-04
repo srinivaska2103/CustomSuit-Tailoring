@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="root-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier | Authentication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:italic,wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { gold: '#C5A059' },
+                    fontFamily: { serif: ['Cormorant Garamond', 'serif'], sans: ['Montserrat', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .auth-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass { backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="bg-[#F9F8F6] dark:bg-zinc-950 font-sans transition-colors duration-500">
+
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center">
+        <a href="index.html" class="text-xl lg:text-2xl font-serif font-bold tracking-[0.15em] lg:tracking-[0.2em] text-gold">
+            STITCH
+        </a>
+
+        <div class="flex items-center gap-4">
+            <button onclick="toggleDirection()" class="p-2 w-10 h-10 rounded-full border border-gray-200 dark:border-zinc-800 flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-400 hover:border-gold transition-all">
+                <span id="dir-text">LTR</span>
+            </button>
+            <button onclick="toggleTheme()" class="p-2 w-10 h-10 rounded-full bg-white dark:bg-zinc-900 shadow-sm border border-gray-100 dark:border-zinc-800 text-gray-600 dark:text-gold hover:scale-110 transition-all">
+                <i id="theme-icon" class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="min-h-screen flex items-center justify-center p-6">
+        <div class="w-full max-w-[1024px] bg-white dark:bg-zinc-900 shadow-2xl rounded-sm overflow-hidden grid grid-cols-1 lg:grid-cols-2 auth-card">
+            
+            <div class="hidden lg:block relative overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&q=80&w=800" 
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-110" alt="Bespoke Suit">
+                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-700"></div>
+                <div class="absolute inset-0 flex flex-col justify-end p-12 text-white">
+                    <h2 class="text-4xl font-serif italic mb-4">The mark of <br> a gentleman.</h2>
+                    <p class="text-sm tracking-widest opacity-70 uppercase">Exclusive Bespoke Community</p>
+                </div>
+            </div>
+
+            <div class="p-8 md:p-12 lg:p-16 relative">
+                
+                <div id="login-section" class="space-y-8">
+                    <div>
+                        <h1 class="text-3xl font-serif text-gray-900 dark:text-white mb-2">Welcome Back</h1>
+                        <p class="text-xs text-gray-400 uppercase tracking-widest">Login to your account</p>
+                    </div>
+
+                    <form class="space-y-5">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Email Address</label>
+                            <input type="email" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all">
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-center">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Password</label>
+                                <a href="#" class="text-[9px] uppercase tracking-widest text-gold hover:underline">Forgot?</a>
+                            </div>
+                            <input type="password" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all">
+                        </div>
+                        <button class="w-full py-4 bg-gray-900 dark:bg-gold text-white dark:text-gray-900 text-xs font-bold uppercase tracking-[0.3em] hover:bg-gold dark:hover:bg-white transition-all">
+                            Sign In
+                        </button>
+                    </form>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="h-[1px] flex-1 bg-gray-100 dark:bg-zinc-800"></div>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest">Or continue with</span>
+                            <div class="h-[1px] flex-1 bg-gray-100 dark:bg-zinc-800"></div>
+                        </div>
+                        <div class="flex justify-center gap-4">
+                            <button class="w-12 h-12 rounded-full border border-gray-100 dark:border-zinc-800 flex items-center justify-center hover:border-gold text-gray-600 dark:text-gray-400 transition-all"><i class="fa-brands fa-google"></i></button>
+                            <button class="w-12 h-12 rounded-full border border-gray-100 dark:border-zinc-800 flex items-center justify-center hover:border-gold text-gray-600 dark:text-gray-400 transition-all"><i class="fa-brands fa-apple"></i></button>
+                            <button class="w-12 h-12 rounded-full border border-gray-100 dark:border-zinc-800 flex items-center justify-center hover:border-gold text-gray-600 dark:text-gray-400 transition-all"><i class="fa-brands fa-facebook-f"></i></button>
+                        </div>
+                    </div>
+
+                    <p class="text-center text-[10px] text-gray-400 uppercase tracking-widest">
+                        Don't have an account? <button onclick="toggleAuth()" class="text-gold font-bold hover:underline">Sign Up</button>
+                    </p>
+                </div>
+
+                <div id="signup-section" class="hidden space-y-8">
+                    <div>
+                        <h1 class="text-3xl font-serif text-gray-900 dark:text-white mb-2">Create Account</h1>
+                        <p class="text-xs text-gray-400 uppercase tracking-widest">Join our exclusive circle</p>
+                    </div>
+
+                    <form class="space-y-5">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">First Name</label>
+                                <input type="text" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Last Name</label>
+                                <input type="text" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all">
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Email Address</label>
+                            <input type="email" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Set Password</label>
+                            <input type="password" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all">
+                        </div>
+                        <button class="w-full py-4 bg-gray-900 dark:bg-gold text-white dark:text-gray-900 text-xs font-bold uppercase tracking-[0.3em] hover:bg-gold transition-all">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <p class="text-center text-[10px] text-gray-400 uppercase tracking-widest">
+                        Already a member? <button onclick="toggleAuth()" class="text-gold font-bold hover:underline">Log In</button>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- 1. THEME TOGGLE WITH LOCAL STORAGE ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = 'fa-solid fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.className = 'fa-solid fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // --- 2. LTR/RTL TOGGLE WITH LOCAL STORAGE ---
+        function toggleDirection() {
+            const html = document.getElementById('root-html');
+            const dirText = document.getElementById('dir-text');
+            if (html.dir === 'ltr') {
+                html.dir = 'rtl';
+                dirText.innerText = 'RTL';
+                localStorage.setItem('dir', 'rtl');
+            } else {
+                html.dir = 'ltr';
+                dirText.innerText = 'LTR';
+                localStorage.setItem('dir', 'ltr');
+            }
+        }
+
+        // --- 3. SWITCH BETWEEN LOGIN & SIGNUP ---
+        function toggleAuth() {
+            const login = document.getElementById('login-section');
+            const signup = document.getElementById('signup-section');
+            login.classList.toggle('hidden');
+            signup.classList.toggle('hidden');
+        }
+
+        // --- 4. INITIALIZE PREFERENCES ---
+        window.onload = () => {
+            // Check Theme
+            if (localStorage.getItem('theme') === 'dark' || 
+                (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+            }
+            // Check Direction
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.getElementById('root-html').dir = 'rtl';
+                document.getElementById('dir-text').innerText = 'RTL';
+            }
+        };
+    </script>
+</body>
+</html>

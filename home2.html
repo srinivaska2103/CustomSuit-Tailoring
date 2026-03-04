@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en" id="root-html" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bespoke Elegance | Custom Tailoring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { gold: '#C5A059', darkNavy: '#05070A' },
+                    transitionProperty: { 'width': 'width' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: #C5A059;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .glass { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-white text-gray-900 dark:bg-darkNavy dark:text-gray-100 transition-colors duration-500">
+
+    
+  <nav class="fixed w-full z-50 bg-white/80 dark:bg-darkNavy/80 border-b border-gray-100 dark:border-gray-800 glass transition-all duration-300">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 h-20 lg:h-24 flex justify-between items-center">
+        <a href="index.html">
+             <div class="flex flex-col leading-none flex-shrink-0">
+            <span class="text-xl lg:text-2xl font-serif font-bold tracking-[0.15em] lg:tracking-[0.2em] text-gold">STITCH</span>
+           
+        </div>
+        </a>
+       
+
+        <div class="hidden lg:flex items-center space-x-4 xl:space-x-8">
+         
+ <div class="flex space-x-4 xl:space-x-6 text-[11px] xl:text-sm uppercase tracking-widest font-medium">
+    <a href="index.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">
+        Home
+        
+    </a>
+
+    <a href="home2.html" class="relative text-gold font-bold transition-all whitespace-nowrap">Home 2
+        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-gold"></span>
+    </a>
+    <a href="booking.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Book Now</a>
+    <a href="services.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Services</a>
+    <a href="gallery.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Gallery</a>
+    <a href="contact.html" class="nav-link whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">Contact</a>
+</div>
+
+            <div class="flex items-center bg-gray-100/50 dark:bg-gray-900/50 p-1 lg:p-1.5 rounded-full border border-gray-200 dark:border-gray-700 space-x-1 lg:space-x-2">
+                <button onclick="toggleTheme()" class="w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center rounded-full hover:bg-white dark:hover:bg-gray-800 transition shadow-sm" title="Toggle Theme">
+                    <i class="fa-solid fa-circle-half-stroke text-xs lg:text-base"></i>
+                </button>
+                
+                <button onclick="toggleDirection()" class="text-[9px] lg:text-[10px] font-bold w-8 h-8 lg:w-10 lg:h-10 rounded-full border border-gray-300 dark:border-gray-600 hover:border-gold transition uppercase" id="dir-label">LTR</button>
+                
+                <a href="login.html" class="px-3 xl:px-4 py-1.5 xl:py-2 border border-gold/30 hover:border-gold text-gold rounded-full text-[10px] xl:text-xs font-bold uppercase tracking-tighter transition-all whitespace-nowrap">
+                    Register
+                </a>
+
+                <a href="user.html" class="flex items-center space-x-1 xl:space-x-2 px-3 xl:px-4 py-1.5 xl:py-2 bg-gold text-white rounded-full text-[10px] xl:text-xs font-bold uppercase tracking-tighter hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all shadow-lg shadow-gold/20 whitespace-nowrap">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span class="hidden xl:inline">Dashboard</span>
+                    <span class="xl:hidden">User</span>
+                </a>
+            </div>
+        </div>
+
+        <button id="menu-open" class="lg:hidden p-2 text-2xl hover:text-gold transition-transform active:scale-90">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+    </div>
+</nav>
+
+    <div id="sidebar" class="fixed inset-0 z-[100] invisible">
+        <div id="sidebar-overlay" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300"></div>
+        <div id="sidebar-content" class="absolute right-0 top-0 h-full w-[300px] bg-white dark:bg-darkNavy shadow-2xl transform translate-x-full transition-transform duration-300 p-8 flex flex-col">
+            <div class="flex justify-between items-center mb-12">
+                <span class="text-gold font-serif font-bold">MENU</span>
+                <button id="menu-close" class="text-2xl">&times;</button>
+            </div>
+            
+            <div class="flex justify-between mb-8 p-4 bg-gray-100 dark:bg-gray-900 rounded-xl">
+                <button onclick="toggleTheme()" class="flex items-center space-x-2">
+                    <i class="fa-solid fa-moon"></i> <span>Theme</span>
+                </button>
+                <button onclick="toggleDirection()" class="font-bold border-l border-gray-300 dark:border-gray-700 pl-4" id="dir-label-mobile">LTR</button>
+            </div>
+            <nav class="flex flex-col space-y-4 text-lg font-serif mb-10">
+    <a href="index.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Home
+       
+    </a>
+
+    <a href="home2.html" class="flex items-center justify-between text-gold border-l-4 border-gold pl-4 transition-all duration-300 font-bold bg-gold/5 py-2">
+        Home 2
+             <i class="fa-solid fa-chevron-right text-[10px]"></i>
+    </a>
+
+    <a href="booking.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Book Now
+    </a>
+
+    <a href="services.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Services
+    </a>
+
+    <a href="gallery.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Gallery
+    </a>
+
+    <a href="contact.html" class="pl-4 hover:text-gold hover:pl-6 transition-all duration-300 text-gray-600 dark:text-gray-300">
+        Contact
+    </a>
+</nav>
+
+            
+            <div class="mt-auto space-y-4">
+        <a href="user.html" class="flex items-center justify-center space-x-3 w-full bg-gold text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg shadow-gold/20 active:scale-[0.98] transition-all">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>User Dashboard</span>
+        </a>
+
+        <a href="login.html" class="flex items-center justify-center w-full border-2 border-gold text-gold py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-gold hover:text-white active:scale-[0.98] transition-all">
+            Register Account
+        </a>
+    </div>
+        </div>
+    </div>  
+    <script>
+        // Function to highlight the active menu item based on the URL
+function highlightActiveLink() {
+    const currentPath = window.location.pathname.split("/").pop() || 'index.html';
+    const allLinks = document.querySelectorAll('nav a, #sidebar-content nav a');
+
+    allLinks.forEach(link => {
+        const linkPath = link.getAttribute('href');
+        
+        if (linkPath === currentPath) {
+            // Apply Desktop Active Classes
+            link.classList.add('text-gold', 'font-bold');
+            // If it's the sidebar link, add the border
+            if (link.closest('#sidebar-content')) {
+                link.classList.add('border-l-4', 'border-gold', 'pl-4', 'bg-gold/5');
+            }
+        }
+    });
+}
+
+// Call on load
+window.addEventListener('DOMContentLoaded', highlightActiveLink);
+    </script>
+    <br>
+
+
+
+<section class="relative min-h-[90vh] flex items-center justify-center bg-[#FDFCFB] dark:bg-zinc-950 px-6 overflow-hidden transition-colors duration-500">
+    
+    <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20 dark:opacity-10">
+        <svg class="absolute top-0 right-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0 100 C 20 0 50 0 100 100" stroke="#C5A059" fill="transparent" stroke-width="0.1" />
+        </svg>
+    </div>
+
+    <div class="max-w-[1024px] mx-auto w-full relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-gold/10 border border-gold/20 rounded-full">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+                    </span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-gold font-bold">New Season Slots Available</span>
+                </div>
+
+                <div class="space-y-4">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif text-zinc-900 dark:text-white leading-[1.1] tracking-tight">
+                        Your Perfect <br> <span class="italic text-gold">Fit Starts Here.</span>
+                    </h1>
+                    <p class="text-gray-500 dark:text-zinc-400 text-lg md:text-xl font-light max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                        Experience the gold standard of bespoke tailoring. Crafted for the boardroom, designed for the individual.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-6 pt-4">
+                    <a href="booking.html">
+                         <button id="hero-magnetic-btn" class="w-full sm:w-auto px-12 py-6 bg-zinc-950 dark:bg-gold text-white dark:text-zinc-950 text-[11px] font-bold uppercase tracking-[0.5em] transition-all duration-300 hover:bg-gold dark:hover:bg-white hover:text-white shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)] active:scale-95">
+                        Book Your Fitting
+                    </button>
+                    </a>
+                   
+                    
+                    <a href="gallery.html" class="group flex items-center gap-4 text-[10px] uppercase tracking-[0.4em] text-zinc-400 hover:text-gold transition-colors">
+                        Explore Collection
+                        <span class="w-8 h-[1px] bg-zinc-300 dark:bg-zinc-800 group-hover:w-12 group-hover:bg-gold transition-all"></span>
+                    </a>
+                </div>
+
+                <div class="pt-12 flex flex-wrap justify-center lg:justify-start gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-serif text-zinc-900 dark:text-white">4.9/5</span>
+                        <span class="text-[8px] uppercase tracking-widest text-zinc-400">Client Rating</span>
+                    </div>
+                    <div class="w-[1px] h-10 bg-zinc-200 dark:bg-zinc-800"></div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-serif text-zinc-900 dark:text-white">15+</span>
+                        <span class="text-[8px] uppercase tracking-widest text-zinc-400">Years of Craft</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 relative group">
+                <div class="relative aspect-[4/5] overflow-hidden bg-zinc-100 dark:bg-zinc-900 shadow-2xl">
+                    <img src="assets/home 2" 
+                         alt="Tailored Perfection" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out">
+                    
+                    <div class="absolute top-8 -left-8 bg-white dark:bg-zinc-800 p-6 shadow-xl border border-gray-100 dark:border-zinc-700 hidden md:block animate-bounce-slow">
+                        <p class="text-[10px] uppercase tracking-widest text-gold font-bold mb-1">Fabric No. 042</p>
+                        <p class="text-zinc-500 text-[9px]">Super 150's Italian Wool</p>
+                    </div>
+                </div>
+
+                <div class="absolute -inset-4 border border-gold/20 -z-10 translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-700"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes bounce-slow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    .animate-bounce-slow {
+        animation: bounce-slow 4s ease-in-out infinite;
+    }
+</style>
+
+<script>
+    const heroBtn = document.querySelector('#hero-magnetic-btn');
+    
+    document.addEventListener('mousemove', (e) => {
+        const rect = heroBtn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const distance = Math.sqrt(x*x + y*y);
+        
+        if (distance < 200) {
+            heroBtn.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
+        } else {
+            heroBtn.style.transform = `translate(0px, 0px)`;
+        }
+    });
+</script>
+
+<section class="py-24 px-6 bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500 overflow-hidden">
+    <div class="max-w-[1024px] mx-auto">
+        <div class="relative group bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-8 md:p-16 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.08)] overflow-hidden">
+            
+            <div class="absolute inset-0 opacity-40 pointer-events-none bg-[radial-gradient(circle_at_var(--x,_50%)_var(--y,_50%),_rgba(197,160,89,0.15)_0%,_transparent_60%)]" id="offer-glow-light"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+                
+                <div class="space-y-8">
+                    <div class="inline-block px-4 py-1 border border-gold/30 bg-gold/5">
+                        <p class="text-[9px] uppercase tracking-[0.4em] text-gold font-bold">Exclusive Seasonal Offer</p>
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-serif text-zinc-900 dark:text-white leading-tight">
+                        Free Consultation <br> 
+                        <span class="italic text-gold">+ Personal Style Guide</span>
+                    </h2>
+
+                    <p class="text-zinc-500 dark:text-zinc-400 text-sm font-light leading-relaxed max-w-sm">
+                        Secure your 30-minute session with our Master Tailor and receive a bespoke digital lookbook tailored to your physique.
+                    </p>
+
+                    <div class="flex gap-6 border-t border-gray-100 dark:border-zinc-800 pt-8">
+                        <div>
+                            <span id="days-l" class="block text-2xl font-serif text-zinc-900 dark:text-white">03</span>
+                            <span class="text-[8px] uppercase tracking-widest text-zinc-400">Days</span>
+                        </div>
+                        <div class="text-gold/40 text-2xl">:</div>
+                        <div>
+                            <span id="hours-l" class="block text-2xl font-serif text-zinc-900 dark:text-white">12</span>
+                            <span class="text-[8px] uppercase tracking-widest text-zinc-400">Hours</span>
+                        </div>
+                        <div class="text-gold/40 text-2xl">:</div>
+                        <div>
+                            <span id="mins-l" class="block text-2xl font-serif text-zinc-900 dark:text-white">45</span>
+                            <span class="text-[8px] uppercase tracking-widest text-zinc-400">Mins</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex justify-center lg:justify-end">
+                    <div class="relative w-64 h-80 bg-gray-50 dark:bg-zinc-800 shadow-2xl transition-transform duration-700 group-hover:-rotate-2 group-hover:scale-105 overflow-hidden">
+                        <img src="assets/Style Guide Preview" 
+                             class="w-full h-full object-cover" alt="Style Guide Preview">
+                        
+                        <div class="absolute -bottom-4 -left-4 bg-zinc-900 dark:bg-gold p-5 shadow-xl animate-float">
+                            <p class="text-white dark:text-black text-[9px] font-bold uppercase tracking-widest">Digital Lookbook</p>
+                            <p class="text-gold dark:text-black/60 text-[8px] uppercase tracking-widest">Complimentary</p>
+                        </div>
+                    </div>
+                    
+                    <button class="absolute bottom-0 right-0 translate-y-1/2 translate-x-4 w-24 h-24 rounded-full bg-zinc-900 text-white text-[10px] font-bold uppercase tracking-tighter flex flex-col items-center justify-center hover:bg-gold hover:text-black transition-all shadow-2xl active:scale-95 z-20">
+                        Claim <br> Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    .animate-float {
+        animation: float 5s ease-in-out infinite;
+    }
+</style>
+
+<script>
+    // 1. Mouse-following Glow Effect (Targeting Light ID)
+    const glowContainer = document.querySelector('#offer-glow-light');
+    document.addEventListener('mousemove', (e) => {
+        const rect = glowContainer.parentElement.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        glowContainer.parentElement.style.setProperty('--x', `${x}%`);
+        glowContainer.parentElement.style.setProperty('--y', `${y}%`);
+    });
+
+    // 2. Countdown Timer Logic
+    function updateTimer() {
+        const now = new Date();
+        const m = document.getElementById('mins-l');
+        const h = document.getElementById('hours-l');
+        if(m) m.innerText = (60 - now.getMinutes()).toString().padStart(2, '0');
+        if(h) h.innerText = (24 - now.getHours()).toString().padStart(2, '0');
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+</script>
+
+<section class="py-24 px-6 bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500">
+    <div class="max-w-[1024px] mx-auto">
+        
+        <div class="mb-20 text-center">
+            <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold mb-4">The Atelier Experience</h2>
+            <h3 class="text-4xl font-serif text-zinc-900 dark:text-white">Three Steps to <span class="italic text-gold">Perfection.</span></h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+            
+            <div class="hidden md:block absolute top-1/4 left-0 w-full h-[1px] bg-gray-100 dark:bg-zinc-800 -z-0"></div>
+
+            <div class="group relative flex flex-col items-center text-center space-y-6 z-10">
+                <div class="w-16 h-16 rounded-full bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:border-gold group-hover:text-gold transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:-translate-y-2">
+                    <span class="font-serif text-xl italic">01</span>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-zinc-900 dark:text-white font-serif text-2xl group-hover:text-gold transition-colors">Book</h4>
+                    <p class="text-gray-500 dark:text-zinc-400 text-sm font-light leading-relaxed px-4">
+                        Schedule your private consultation at our atelier or your preferred location.
+                    </p>
+                </div>
+                <div class="md:hidden w-[1px] h-12 bg-gold/30"></div>
+            </div>
+
+            <div class="group relative flex flex-col items-center text-center space-y-6 z-10">
+                <div class="w-16 h-16 rounded-full bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:border-gold group-hover:text-gold transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:-translate-y-2">
+                    <span class="font-serif text-xl italic">02</span>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-zinc-900 dark:text-white font-serif text-2xl group-hover:text-gold transition-colors">Customize</h4>
+                    <p class="text-gray-500 dark:text-zinc-400 text-sm font-light leading-relaxed px-4">
+                        Select from 5,000+ premium fabrics and define every detail from lapels to linings.
+                    </p>
+                </div>
+                <div class="md:hidden w-[1px] h-12 bg-gold/30"></div>
+            </div>
+
+            <div class="group relative flex flex-col items-center text-center space-y-6 z-10">
+                <div class="w-16 h-16 rounded-full bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:border-gold group-hover:text-gold transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:-translate-y-2">
+                    <span class="font-serif text-xl italic">03</span>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="text-zinc-900 dark:text-white font-serif text-2xl group-hover:text-gold transition-colors">Wear with Confidence</h4>
+                    <p class="text-gray-500 dark:text-zinc-400 text-sm font-light leading-relaxed px-4">
+                        The final fitting ensures a second-skin feel. Step out in a garment made only for you.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-20 text-center">
+            <button class="px-10 py-5 border border-zinc-200 dark:border-zinc-800 text-[10px] uppercase tracking-[0.4em] text-zinc-500 hover:text-gold hover:border-gold transition-all">
+                Learn more about the process
+            </button>
+        </div>
+    </div>
+</section>
+<section id="testimonials" class="py-24 bg-[#FCFBFA] overflow-hidden transition-colors duration-500">
+    <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="flex flex-col items-center text-center mb-16 lg:mb-20">
+            <h2 class="text-gold uppercase tracking-[0.4em] text-[10px] lg:text-xs font-bold mb-4">The Sartorial Experience</h2>
+            <h3 class="text-4xl md:text-5xl font-serif text-gray-900 leading-tight">Voices of <span class="italic text-gold">Confidence.</span></h3>
+            <div class="w-24 h-[1px] bg-gold mt-8"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-sm shadow-lg cursor-pointer bg-gray-100">
+                <img src="assets/t1" 
+                     alt="Julian Montgomery" 
+                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <h4 class="text-white text-lg font-serif tracking-widest uppercase">Julian Montgomery</h4>
+                    <p class="text-gold text-[10px] uppercase tracking-widest font-bold">Creative Director</p>
+                </div>
+
+                <div class="absolute inset-0 bg-white/90 backdrop-blur-md p-8 flex flex-col justify-center items-center text-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <i class="fa-solid fa-quote-left text-3xl text-gold/30 mb-6"></i>
+                    <p class="text-gray-800 text-lg font-serif italic leading-relaxed mb-6">
+                        "The precision in the fitting was unlike anything I've experienced in London or Milan. A true masterpiece."
+                    </p>
+                    <div class="w-10 h-[1px] bg-gold mb-4"></div>
+                    <h4 class="text-gray-900 text-sm font-bold uppercase tracking-widest">Julian Montgomery</h4>
+                    <p class="text-gold text-[9px] uppercase tracking-widest mt-1">Apex Media</p>
+                </div>
+            </div>
+
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-sm shadow-lg cursor-pointer bg-gray-100">
+                <img src="assets/t3" 
+                     alt="David H." 
+                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <h4 class="text-white text-lg font-serif tracking-widest uppercase">David Harrison</h4>
+                    <p class="text-gold text-[10px] uppercase tracking-widest font-bold">Groom</p>
+                </div>
+
+                <div class="absolute inset-0 bg-white/90 backdrop-blur-md p-8 flex flex-col justify-center items-center text-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <i class="fa-solid fa-quote-left text-3xl text-gold/30 mb-6"></i>
+                    <p class="text-gray-800 text-lg font-serif italic leading-relaxed mb-6">
+                        "Perfect for my wedding day. Every guest asked where the suit was from. It felt like a second skin."
+                    </p>
+                    <div class="w-10 h-[1px] bg-gold mb-4"></div>
+                    <h4 class="text-gray-900 text-sm font-bold uppercase tracking-widest">David Harrison</h4>
+                    <p class="text-gold text-[9px] uppercase tracking-widest mt-1">Wedding Collection</p>
+                </div>
+            </div>
+
+            <div class="group relative aspect-[4/5] overflow-hidden rounded-sm shadow-lg cursor-pointer bg-gray-100 md:col-span-2 lg:col-span-1">
+                <img src="assets/t4" 
+                     alt="Marcus T." 
+                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                
+                <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                    <h4 class="text-white text-lg font-serif tracking-widest uppercase">Marcus Thorne</h4>
+                    <p class="text-gold text-[10px] uppercase tracking-widest font-bold">Managing Partner</p>
+                </div>
+
+                <div class="absolute inset-0 bg-white/90 backdrop-blur-md p-8 flex flex-col justify-center items-center text-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <i class="fa-solid fa-quote-left text-3xl text-gold/30 mb-6"></i>
+                    <p class="text-gray-800 text-lg font-serif italic leading-relaxed mb-6">
+                        "Their fabric library is unmatched. The Loro Piana wool is exquisite and the service is truly first-class."
+                    </p>
+                    <div class="w-10 h-[1px] bg-gold mb-4"></div>
+                    <h4 class="text-gray-900 text-sm font-bold uppercase tracking-widest">Marcus Thorne</h4>
+                    <p class="text-gold text-[9px] uppercase tracking-widest mt-1">Loro Piana Collection</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="py-24 px-6 bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500 overflow-hidden relative">
+    
+    <div class="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
+        <svg width="100%" height="100%" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-100 800 C 200 700 400 900 1100 600" stroke="#C5A059" stroke-width="0.5" stroke-dasharray="10 10" />
+        </svg>
+    </div>
+
+    <div class="max-w-[1024px] mx-auto relative z-10">
+        <div class="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 p-10 md:p-20 text-center shadow-[0_50px_100px_-20px_rgba(0,0,0,0.06)]">
+            
+            <div class="space-y-6">
+                <h4 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold">Secure Your Slot</h4>
+                <h2 class="text-4xl md:text-6xl font-serif text-zinc-900 dark:text-white leading-tight">
+                    Ready to define your <br> <span class="italic text-gold">Signature Look?</span>
+                </h2>
+                <p class="text-zinc-500 dark:text-zinc-400 text-sm md:text-base font-light max-w-lg mx-auto leading-relaxed">
+                    Select your consultation type below to begin your bespoke journey.
+                </p>
+            </div>
+
+            <div class="mt-12 flex flex-wrap justify-center gap-3">
+                <button class="px-6 py-3 rounded-full border border-gray-100 dark:border-zinc-800 text-[9px] uppercase tracking-widest text-zinc-600 dark:text-zinc-400 hover:border-gold hover:text-gold transition-colors">
+                    Wedding & Events
+                </button>
+                <button class="px-6 py-3 rounded-full border border-gray-100 dark:border-zinc-800 text-[9px] uppercase tracking-widest text-zinc-600 dark:text-zinc-400 hover:border-gold hover:text-gold transition-colors">
+                    Executive / Business
+                </button>
+                <button class="px-6 py-3 rounded-full border border-gray-100 dark:border-zinc-800 text-[9px] uppercase tracking-widest text-zinc-600 dark:text-zinc-400 hover:border-gold hover:text-gold transition-colors">
+                    Casual Luxury
+                </button>
+            </div>
+
+            <div class="mt-10 flex flex-col items-center gap-6">
+                <a href="booking.html">
+                     <button class="group relative px-16 py-7 bg-zinc-950 dark:bg-gold text-white dark:text-zinc-950 text-[11px] font-bold uppercase tracking-[0.5em] hover:bg-gold dark:hover:bg-white transition-all shadow-2xl active:scale-95">
+                    Book Consultation
+                </button>
+                </a>
+               
+
+                <div class="flex items-center gap-6 pt-4">
+                    <a href="contact.html" class="flex items-center gap-2 text-zinc-400 hover:text-green-600 transition-colors text-[10px] uppercase tracking-widest">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        Quick WhatsApp Chat
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<footer class="bg-gray-50 dark:bg-black pt-16 lg:pt-20 pb-10 px-6 border-t border-gray-200 dark:border-gray-800 transition-colors duration-500">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+            
+            <div class="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
+                <a href="index.html">
+                    <div class="flex flex-col leading-none">
+                    <span class="text-2xl font-serif font-bold tracking-[0.2em] text-gold uppercase">Stitch</span>
+                    <!-- <span class="text-[10px] uppercase tracking-[0.4em] opacity-60 dark:text-white">Bespoke</span> -->
+                </div>
+                </a>
+                
+                <p class="text-sm opacity-70 leading-relaxed max-w-xs">
+                    Mastering the art of bespoke tailoring since 1992. Every stitch tells a story of elegance and precision.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gold hover:text-white hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gold hover:text-white hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-facebook-f text-base"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700 flex items-center justify-center hover:bg-gold hover:text-white hover:border-gold hover:-translate-y-1.5 transition-all duration-300 shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-bold uppercase tracking-[0.2em] mb-6 text-xs text-gold">Explore</h4>
+                <ul class="space-y-4 text-sm opacity-80 text-center md:text-left">
+                    <li><a href="index.html" class="hover:text-gold transition-colors block">Home</a></li>
+                    <li><a href="about.html" class="hover:text-gold transition-colors block">About Us</a></li>
+                    <li><a href="service.html" class="hover:text-gold transition-colors block">Services</a></li>
+                    <li><a href="404.html" class="text-red-500/80 hover:text-red-500 transition-colors block">404 Page</a></li>
+                    <li><a href="comingsoon.html" class="hover:text-gold transition-colors block">Coming Soon</a></li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-bold uppercase tracking-[0.2em] mb-6 text-xs text-gold">Services</h4>
+                <ul class="space-y-4 text-sm opacity-80 text-center md:text-left">
+                    <li><a href="home2.html" class="hover:text-gold transition-colors block">Home2</a></li>
+                    <li><a href="contact.html" class="hover:text-gold transition-colors block">Contact Us</a></li>
+                    <li><a href="booknow.html" class="hover:text-gold transition-colors block">Book Now</a></li>
+                    <li><a href="gallery.html" class="hover:text-gold transition-colors block">Gallery</a></li>
+                    <li><a href="user.html" class="hover:text-gold transition-colors block">User Dashboard</a></li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="font-bold uppercase tracking-[0.2em] mb-6 text-xs text-gold text-center md:text-left">Stay Informed</h4>
+                <p class="text-xs opacity-70 mb-6 text-center md:text-left">Subscribe to receive style guides and exclusive fabric launch alerts.</p>
+                <div class="relative w-full max-w-sm">
+                    <input type="email" placeholder="Email Address" 
+                        class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-4 pr-12 lg:pr-32 focus:outline-none focus:border-gold transition-all text-sm rounded-sm">
+                    <button class="absolute right-2 top-2 bottom-2 bg-gold text-white px-4 lg:px-6 font-bold uppercase text-[10px] tracking-widest hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all">
+                        <span class="hidden lg:inline">Subscribe</span>
+                        <i class="fa-solid fa-paper-plane lg:hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center pt-10 border-t border-gray-200 dark:border-gray-800">
+            <p class="text-[9px] lg:text-[10px] uppercase tracking-[0.3em] opacity-50 dark:text-white">
+                &copy; 2026 Stitch & Style Bespoke. Crafted with Passion.
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        const root = document.getElementById('root-html');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarContent = document.getElementById('sidebar-content');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        // Sidebar Interaction
+        document.getElementById('menu-open').onclick = () => {
+            sidebar.classList.remove('invisible');
+            setTimeout(() => {
+                sidebarContent.classList.remove('translate-x-full');
+                sidebarOverlay.classList.replace('opacity-0', 'opacity-100');
+            }, 10);
+        };
+
+        const closeMenu = () => {
+            sidebarContent.classList.add('translate-x-full');
+            sidebarOverlay.classList.replace('opacity-100', 'opacity-0');
+            setTimeout(() => sidebar.classList.add('invisible'), 300);
+        };
+
+        document.getElementById('menu-close').onclick = closeMenu;
+        sidebarOverlay.onclick = closeMenu;
+
+        // Theme Toggle
+        function toggleTheme() {
+            root.classList.toggle('dark');
+            localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Direction Toggle
+        function toggleDirection() {
+            const isRtl = root.getAttribute('dir') === 'rtl';
+            const newDir = isRtl ? 'ltr' : 'rtl';
+            root.setAttribute('dir', newDir);
+            localStorage.setItem('dir', newDir);
+            document.getElementById('dir-label').innerText = newDir.toUpperCase();
+            document.getElementById('dir-label-mobile').innerText = newDir.toUpperCase();
+        }
+
+        // Init
+        if (localStorage.theme === 'dark') root.classList.add('dark');
+        if (localStorage.dir) {
+            root.setAttribute('dir', localStorage.dir);
+            document.getElementById('dir-label').innerText = localStorage.dir.toUpperCase();
+        }
+    </script>
+</body>
+</html>
