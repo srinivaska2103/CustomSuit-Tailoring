@@ -164,51 +164,53 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
     </script>
     <br>
 
-    <section id="gallery-hero" class="relative pt-40 pb-20 lg:pt-52 lg:pb-32 px-6 overflow-hidden bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500">
-    
-    <div class="absolute inset-0 flex items-center justify-center opacity-[0.02] dark:opacity-[0.04] pointer-events-none select-none">
-        <h1 class="text-[18rem] lg:text-[35rem] font-serif font-bold uppercase tracking-tighter">Archive</h1>
-    </div>
+<section id="gallery-hero" class="relative min-h-[80vh] flex items-center justify-center pt-32 pb-16 md:pt-44 md:pb-24 lg:pt-52 lg:pb-32 px-6 overflow-hidden bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500">
+    
+    <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] dark:opacity-[0.06] pointer-events-none select-none z-0">
+        <h1 class="text-[25vw] lg:text-[30vw] font-serif font-bold uppercase tracking-tighter leading-none">
+            Archive
+        </h1>
+    </div>
 
-    <div class="absolute left-1/2 top-0 w-[1px] h-32 bg-gradient-to-b from-transparent to-gold opacity-30 -translate-x-1/2"></div>
+   
 
-    <div class="max-w-[1024px] mx-auto relative z-10">
-        <div class="text-center space-y-10">
-            
-            <div class="flex justify-center gap-8 md:gap-12 mb-4">
-                <button class="text-[9px] uppercase tracking-[0.4em] text-gold font-bold border-b border-gold pb-1">All Works</button>
-                <button class="text-[9px] uppercase tracking-[0.4em] text-gray-400 hover:text-gold transition-colors pb-1">Bespoke</button>
-                <button class="text-[9px] uppercase tracking-[0.4em] text-gray-400 hover:text-gold transition-colors pb-1">Details</button>
-            </div>
+    <div class="max-w-[1024px] w-full mx-auto relative z-10">
+        <div class="text-center flex flex-col items-center space-y-8 md:space-y-12">
+            
+            <div class="flex flex-wrap justify-center gap-6 md:gap-12 mb-2">
+                <button class="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-gold font-bold border-b border-gold pb-1 whitespace-nowrap">All Works</button>
+                <button class="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-gray-400 hover:text-gold transition-colors pb-1 whitespace-nowrap">Bespoke</button>
+                <button class="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-gray-400 hover:text-gold transition-colors pb-1 whitespace-nowrap">Details</button>
+            </div>
 
-            <div class="space-y-4">
-                <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold opacity-0 translate-y-4 transition-all duration-700 delay-100 reveal">The Visual Journal</h2>
-                <h3 class="text-6xl md:text-8xl font-serif text-zinc-900 dark:text-white leading-none opacity-0 translate-y-8 transition-all duration-1000 delay-300 reveal 
-           text-center md:text-center lg:text-center">
-    Curated <br> 
-    <span class="italic text-gold">Artistry.</span>
-</h3>
-            </div>
+            <div class="space-y-4 md:space-y-6">
+                <h2 class="text-gold uppercase tracking-[0.6em] text-[9px] md:text-[10px] font-bold reveal">
+                    The Visual Journal
+                </h2>
+                <h3 class="text-5xl md:text-7xl lg:text-8xl font-serif text-zinc-900 dark:text-white leading-[1.1] md:leading-none reveal">
+                    Curated <br class="md:hidden"> <span class="bold text-gold md:inline-block">Artistry</span>
+                </h3>
+            </div>
 
-            <p class="text-gray-500 dark:text-gray-400 text-lg font-light max-w-xl mx-auto leading-relaxed opacity-0 transition-opacity duration-1000 delay-500 reveal">
-                A testament to the needle and the thread. Explore our archive of silhouettes, rare textiles, and the hands that craft them.
-            </p>
+            <p class="text-gray-500 dark:text-gray-400 text-base md:text-lg font-light max-w-lg md:max-w-xl mx-auto leading-relaxed reveal">
+                A testament to the needle and the thread. Explore our archive of silhouettes, rare textiles, and the hands that craft them.
+            </p>
 
-            <div class="pt-16 flex flex-col items-center gap-4 group cursor-pointer" onclick="document.getElementById('gallery-grid').scrollIntoView({behavior: 'smooth'})">
-                <div class="w-[1px] h-12 bg-gray-200 dark:bg-zinc-800 relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gold -translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
-                </div>
-                <span class="text-[8px] uppercase tracking-[0.5em] text-gray-400 group-hover:text-gold transition-colors">Scroll to Explore</span>
-            </div>
-        </div>
-    </div>
+            <div class="pt-8 md:pt-16 flex flex-col items-center gap-4 group cursor-pointer" onclick="document.getElementById('gallery-grid').scrollIntoView({behavior: 'smooth'})">
+                <div class="w-[1px] h-10 md:h-14 bg-gray-200 dark:bg-zinc-800 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gold -translate-y-full group-hover:translate-y-0 transition-transform duration-700"></div>
+                </div>
+                <span class="text-[8px] md:text-[9px] uppercase tracking-[0.5em] text-gray-400 group-hover:text-gold transition-colors">Scroll to Explore</span>
+            </div>
+        </div>
+    </div>
 
-    <div class="absolute bottom-10 right-10 hidden lg:block opacity-10 dark:opacity-20">
-        <svg width="150" height="150" viewBox="0 0 100 100" fill="none" stroke="#C5A059" stroke-width="0.5">
-            <circle cx="50" cy="50" r="40" />
-            <path d="M50 10 V90 M10 50 H90" />
-        </svg>
-    </div>
+    <div class="absolute bottom-6 right-6 md:bottom-10 md:right-10 hidden sm:block opacity-10 dark:opacity-20 pointer-events-none">
+        <svg width="80" height="80" class="md:w-[150px] md:h-[150px]" viewBox="0 0 100 100" fill="none" stroke="#C5A059" stroke-width="0.5">
+            <circle cx="50" cy="50" r="40" />
+            <path d="M50 10 V90 M10 50 H90" />
+        </svg>
+    </div>
 </section> 
 
 <script>
@@ -226,41 +228,48 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
 <section id="gallery-grid" class="py-24 px-6 bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500">
     <div class="max-w-[1024px] mx-auto">
         
-        <div class="flex flex-wrap justify-center gap-x-10 gap-y-4 mb-16 border-b border-gray-100 dark:border-zinc-900 pb-8">
-    <button onclick="filterGallery('all')" 
-        class="filter-btn active text-[10px] uppercase tracking-[0.5em] text-gold font-bold transition-all bg-transparent border-none p-0 outline-none">
-        All
-    </button>
+   <div class="flex flex-wrap justify-center gap-x-4 gap-y-4 mb-16 border-b border-gray-100 dark:border-zinc-900 pb-12">
+    
+  <button onclick="filterGallery('all')" 
+    class="filter-btn active px-6 py-2.5 text-[10px] uppercase tracking-[0.2em] font-bold transition-all duration-300 rounded-full border border-gold bg-gold !text-zinc-950 dark:!text-zinc-950 shadow-lg shadow-gold/30 hover:scale-105 active:scale-95">
+    All
+</button>
+
     <button onclick="filterGallery('wedding')" 
-        class="filter-btn text-[10px] uppercase tracking-[0.5em] text-gray-400 hover:text-gold transition-all bg-transparent border-none p-0 outline-none">
+        class="filter-btn px-6 py-2.5 text-[10px] uppercase tracking-[0.2em] text-zinc-600 dark:text-zinc-300 font-bold transition-all duration-300 rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-gold hover:text-gold bg-transparent">
         Wedding
     </button>
+
     <button onclick="filterGallery('business')" 
-        class="filter-btn text-[10px] uppercase tracking-[0.5em] text-gray-400 hover:text-gold transition-all bg-transparent border-none p-0 outline-none">
+        class="filter-btn px-6 py-2.5 text-[9px] uppercase tracking-[0.3em] text-zinc-600 dark:text-zinc-300 font-bold transition-all duration-300 rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-gold hover:text-gold bg-transparent">
         Business
     </button>
+
     <button onclick="filterGallery('tuxedos')" 
-        class="filter-btn text-[10px] uppercase tracking-[0.5em] text-gray-400 hover:text-gold transition-all bg-transparent border-none p-0 outline-none">
+        class="filter-btn px-6 py-2.5 text-[9px] uppercase tracking-[0.3em] text-zinc-600 dark:text-zinc-300 font-bold transition-all duration-300 rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-gold hover:text-gold bg-transparent">
         Tuxedos
     </button>
+
     <button onclick="filterGallery('casual')" 
-        class="filter-btn text-[10px] uppercase tracking-[0.5em] text-gray-400 hover:text-gold transition-all bg-transparent border-none p-0 outline-none">
+        class="filter-btn px-6 py-2.5 text-[9px] uppercase tracking-[0.3em] text-zinc-600 dark:text-zinc-300 font-bold transition-all duration-300 rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-gold hover:text-gold bg-transparent">
         Blazers
     </button>
+
     <button onclick="filterGallery('traditional')" 
-        class="filter-btn text-[10px] uppercase tracking-[0.5em] text-gray-400 hover:text-gold transition-all bg-transparent border-none p-0 outline-none">
+        class="filter-btn px-6 py-2.5 text-[9px] uppercase tracking-[0.3em] text-zinc-600 dark:text-zinc-300 font-bold transition-all duration-300 rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-gold hover:text-gold bg-transparent">
         Traditional
     </button>
+
     <button onclick="filterGallery('fabrics')" 
-        class="filter-btn text-[10px] uppercase tracking-[0.5em] text-gray-400 hover:text-gold transition-all bg-transparent border-none p-0 outline-none">
+        class="filter-btn px-6 py-2.5 text-[9px] uppercase tracking-[0.3em] text-zinc-600 dark:text-zinc-300 font-bold transition-all duration-300 rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-gold hover:text-gold bg-transparent">
         Fabrics
     </button>
+
     <button onclick="filterGallery('bts')" 
-        class="filter-btn text-[10px] uppercase tracking-[0.5em] text-gray-400 hover:text-gold transition-all bg-transparent border-none p-0 outline-none">
+        class="filter-btn px-6 py-2.5 text-[9px] uppercase tracking-[0.3em] text-zinc-600 dark:text-zinc-300 font-bold transition-all duration-300 rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-gold hover:text-gold bg-transparent">
         BTS
     </button>
-</div>
-
+</div>  
         <div id="gallery-wrapper" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             <div class="gallery-item wedding group relative overflow-hidden aspect-[3/4] bg-zinc-100 dark:bg-zinc-900">
@@ -337,6 +346,7 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
     }
 </style>
 
+
 <script>
     function filterGallery(category) {
         // Update Button Styles
@@ -374,7 +384,7 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
         <div class="mb-20 text-center lg:text-left">
             <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold mb-4">The Union Collection</h2>
             <h3 class="text-5xl md:text-7xl font-serif text-zinc-900 dark:text-white leading-tight">
-                Tailored for the <br> <span class="italic text-gold">Most Important Day.</span>
+                Tailored for the <br> <span class="bold text-gold">Most Important Day.</span>
             </h3>
         </div>
 
@@ -451,7 +461,7 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
         <div class="mb-16 text-center">
             <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold mb-4">The Material Archive</h2>
             <h3 class="text-3xl md:text-5xl font-serif text-zinc-900 dark:text-white">
-                The World's Finest <span class="italic text-gold">Weaves.</span>
+                The World's Finest <span class="bold text-gold">Weaves.</span>
             </h3>
         </div>
 
@@ -537,7 +547,7 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
             <div class="space-y-6">
                 <h2 class="text-gold uppercase tracking-[0.6em] text-[10px] font-bold">The Final Stitch</h2>
                 <h3 class="text-4xl md:text-6xl font-serif text-zinc-900 dark:text-white leading-tight">
-                    Craft Your <br> <span class="italic text-gold">Masterpiece.</span>
+                    Craft Your <br> <span class="bold text-gold">Masterpiece.</span>
                 </h3>
                 <p class="text-gray-500 dark:text-gray-400 text-sm font-light max-w-md mx-auto leading-relaxed">
                     Whether it's for the boardroom or the altar, our master tailors are ready to bring your vision to life.

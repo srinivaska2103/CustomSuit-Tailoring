@@ -180,8 +180,8 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
         <h1 class="hero-reveal text-5xl md:text-7xl font-serif text-gray-900 dark:text-white leading-tight opacity-0 translate-y-8 transition-all duration-1000 delay-300">
             <span class="inline-block hover:scale-105 hover:text-gold transition-transform duration-500 cursor-default">Begin Your</span> 
             <br> 
-            <span class="italic text-gold relative group cursor-default inline-block">
-                Commission.
+            <span class="bold text-gold relative group cursor-default inline-block">
+                Commission
                 <span class="absolute bottom-2 left-0 w-0 h-[2px] bg-gold/30 transition-all duration-700 group-hover:w-full"></span>
             </span>
         </h1>
@@ -234,27 +234,47 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
     <section class="py-12 md:py-20 px-6 bg-zinc-50 dark:bg-zinc-950 transition-colors">
     <div class="max-w-[1024px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
-        <div class="lg:col-span-4 space-y-10 md:space-y-12 text-center lg:text-left">
-            <div class="space-y-4">
-                <h3 class="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">Flagship Stitch</h3>
-                <p class="text-gray-900 dark:text-white font-serif text-xl md:text-2xl leading-snug">Savile Row, London<br>Mayfair, W1S 3PR</p>
-                <p class="text-sm text-gray-500 font-light">+44 20 7946 0123</p>
-            </div>
-            
-            <div class="space-y-4">
-                <h3 class="text-[10px] uppercase tracking-[0.3em] font-bold text-gray-400">Inquiries</h3>
-                <div class="space-y-1">
-                    <p class="text-gray-900 dark:text-white font-serif text-lg">appointments@stitch.com</p>
-                    <p class="text-gray-900 dark:text-white font-serif text-lg">press@atelier.com</p>
-                </div>
-            </div>
-
-            <div class="pt-4 flex justify-center lg:justify-start gap-8 text-gray-400">
-                <a href="#" class="hover:text-gold transition-colors text-xl"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="hover:text-gold transition-colors text-xl"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#" class="hover:text-gold transition-colors text-xl"><i class="fa-brands fa-linkedin-in"></i></a>
-            </div>
+        <div class="lg:col-span-4 space-y-12 md:space-y-16 lg:space-y-12 text-center lg:text-left flex flex-col items-center lg:items-start">
+    
+    <div class="space-y-4 group">
+        <h3 class="text-[10px] uppercase tracking-[0.4em] font-bold text-gray-400 group-hover:text-gold transition-colors duration-300">
+            Flagship Stitch
+        </h3>
+        <div class="space-y-2">
+            <p class="text-gray-900 dark:text-white font-serif text-2xl md:text-3xl lg:text-2xl leading-tight">
+                Savile Row, London<br>
+                <!-- <span class="text-gray-400 dark:text-black-500 bold">Mayfair, W1S 3PR</span> -->
+            </p>
+            <p class="text-sm text-gray-500 font-light tracking-widest hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors cursor-pointer">
+                +44 20 7946 0123
+            </p>
         </div>
+    </div>
+    
+    <div class="space-y-5">
+        <h3 class="text-[10px] uppercase tracking-[0.4em] font-bold text-gray-400">
+            Inquiries
+        </h3>
+        <div class="space-y-3">
+            <a href="mailto:appointments@stitch.com" class="block text-gray-900 dark:text-white font-serif text-lg md:text-xl lg:text-lg hover:text-gold dark:hover:text-gold transition-all duration-300">
+                appointments@stitch.com
+            </a>
+            
+        </div>
+    </div>
+
+    <div class="pt-6 flex justify-center lg:justify-start gap-10 text-gray-400 border-t border-gray-100 dark:border-zinc-900 w-full lg:w-auto">
+        <a href="#" class="hover:text-gold transition-all duration-300 hover:-translate-y-1 text-xl">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="#" class="hover:text-gold transition-all duration-300 hover:-translate-y-1 text-xl">
+            <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="#" class="hover:text-gold transition-all duration-300 hover:-translate-y-1 text-xl">
+            <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+    </div>
+</div>
 
         <div class="lg:col-span-8 bg-white dark:bg-zinc-900 p-8 md:p-16 shadow-2xl rounded-sm border border-gray-100 dark:border-zinc-800">
             <form id="contactForm" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
