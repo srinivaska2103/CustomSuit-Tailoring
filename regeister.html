@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="root-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/chef.png">
+    <title>STITCH</title>| Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:italic,wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { gold: '#C5A059' },
+                    fontFamily: { serif: ['Cormorant Garamond', 'serif'], sans: ['Montserrat', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .auth-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-[#F9F8F6] dark:bg-zinc-950 font-sans transition-colors duration-500">
+
+    <nav class="fixed top-0 w-full z-50 p-6 flex justify-between items-center">
+        <a href="index.html" class="text-xl lg:text-2xl font-serif font-bold tracking-[0.15em] lg:tracking-[0.2em] text-gold">
+            STITCH
+        </a>
+
+        <div class="flex items-center gap-4">
+            <button onclick="toggleDirection()" class="p-2 w-10 h-10 rounded-full border border-gray-200 dark:border-zinc-800 flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-400 hover:border-gold transition-all">
+                <span id="dir-text">LTR</span>
+            </button>
+            <button onclick="toggleTheme()" class="p-2 w-10 h-10 rounded-full bg-white dark:bg-zinc-900 shadow-sm border border-gray-100 dark:border-zinc-800 text-gray-600 dark:text-gold hover:scale-110 transition-all">
+                <i id="theme-icon" class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="min-h-screen flex items-center justify-center p-6">
+        <div class="w-full max-w-[1024px] bg-white dark:bg-zinc-900 shadow-2xl rounded-sm overflow-hidden grid grid-cols-1 lg:grid-cols-2 auth-card">
+            
+            <div class="hidden lg:block relative overflow-hidden group">
+                <img src="assets/Bespoke suit final fitting" 
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-110" alt="Tailoring Details">
+                <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-colors duration-700"></div>
+                <div class="absolute inset-0 flex flex-col justify-end p-12 text-white">
+                    <h2 class="text-4xl font-serif italic mb-4">Crafting your <br> unique silhouette.</h2>
+                    <p class="text-sm tracking-widest opacity-70 uppercase">Join the Atelier circle</p>
+                </div>
+            </div>
+
+            <div class="p-8 md:p-12 lg:p-16 relative flex flex-col justify-center bg-white dark:bg-zinc-900">
+                
+                <div id="signup-section" class="space-y-7 fade-in">
+                    <div>
+                        <h1 class="text-3xl font-serif text-gray-900 text-center dark:text-white mb-2">Create Account</h1>
+                        <p class="text-xs text-gray-400 uppercase text-center tracking-widest">Register for a bespoke profile</p>
+                    </div>
+
+                    <form class="space-y-5">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">First Name</label>
+                            <input type="text" placeholder="e.g. Julian" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all placeholder:text-gray-300 dark:placeholder:text-zinc-600">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Last Name</label>
+                            <input type="text" placeholder="e.g. Montgomery" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all placeholder:text-gray-300 dark:placeholder:text-zinc-600">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Email Address</label>
+                            <input type="email" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Password</label>
+                            <input type="password" class="w-full bg-gray-50 dark:bg-zinc-800 border-b border-gray-200 dark:border-zinc-700 p-3 text-sm focus:outline-none focus:border-gold dark:text-white transition-all">
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-4 bg-gray-900 dark:bg-gold text-white dark:text-gray-900 text-xs font-bold uppercase tracking-[0.3em] hover:bg-gold dark:hover:bg-white transition-all shadow-lg">
+                                Register Now
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-center gap-4">
+                            <div class="h-[1px] flex-1 bg-gray-100 dark:bg-zinc-800"></div>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest">Or join with</span>
+                            <div class="h-[1px] flex-1 bg-gray-100 dark:bg-zinc-800"></div>
+                        </div>
+                        <div class="flex justify-center gap-4">
+                            <button class="w-11 h-11 rounded-full border border-gray-100 dark:border-zinc-800 flex items-center justify-center hover:border-gold text-gray-500 dark:text-gray-400 transition-all"><i class="fa-brands fa-google text-sm"></i></button>
+                            <button class="w-11 h-11 rounded-full border border-gray-100 dark:border-zinc-800 flex items-center justify-center hover:border-gold text-gray-500 dark:text-gray-400 transition-all"><i class="fa-brands fa-apple text-sm"></i></button>
+                                                    <button class="w-12 h-12 rounded-full border border-gray-100 dark:border-zinc-800 flex items-center justify-center hover:border-gold text-gray-600 dark:text-gray-400 transition-all"><i class="fa-brands fa-facebook-f"></i></button>
+
+                        </div>
+                    </div>
+
+                    <p class="text-center text-[10px] text-gray-400 uppercase tracking-widest">
+                        Already have an account? <a href="login.html" class="text-gold font-bold hover:underline">Log In</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = 'fa-solid fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.className = 'fa-solid fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function toggleDirection() {
+            const html = document.getElementById('root-html');
+            const dirText = document.getElementById('dir-text');
+            if (html.dir === 'rtl') {
+                html.dir = 'ltr';
+                dirText.innerText = 'LTR';
+                localStorage.setItem('dir', 'ltr');
+            } else {
+                html.dir = 'rtl';
+                dirText.innerText = 'RTL';
+                localStorage.setItem('dir', 'rtl');
+            }
+        }
+
+        window.onload = () => {
+            if (localStorage.getItem('theme') === 'dark' || 
+                (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+            }
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.getElementById('root-html').dir = 'rtl';
+                document.getElementById('dir-text').innerText = 'RTL';
+            }
+        };
+    </script>
+</body>
+</html>
