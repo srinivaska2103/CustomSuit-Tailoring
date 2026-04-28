@@ -162,57 +162,80 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
     </script>
     <br>
 
-  <section class="relative h-screen flex items-center justify-center overflow-hidden bg-black group">
-     
-<div class="absolute inset-0 bg-[#F9F8F6] dark:bg-zinc-950 overflow-hidden">
+<section class="relative min-h-[85vh] flex items-center bg-[#FDFCFB] dark:bg-zinc-950 transition-colors duration-500 overflow-hidden">
     
-    <img src="assets/index hero" 
-        alt="Stitch Hero"
-        class="absolute inset-0 w-full h-full object-contain transition-transform duration-[3000ms] ease-out group-hover:scale-105">
+    <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
+         style="background-image: radial-gradient(#000 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
 
-</div>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-0"></div>
-
-    <div class="relative z-20 text-center px-6">
-        
-        <div class="overflow-hidden mb-4">
-            <h1 class="text-5xl md:text-8xl font-serif text-white leading-tight translate-y-full animate-[slideUp_1s_ease-out_forwards]">
-                Crafted to <span class="text-gold">Fit.</span>
-            </h1>
-        </div>
-        <div class="overflow-hidden mb-6">
-            <h1 class="text-4xl md:text-7xl font-serif text-white bold delay-300 translate-y-full animate-[slideUp_1s_ease-out_0.3s_forwards]">
-                <span class="text-gold">Designed</span> to Impress.
-            </h1>
-        </div>
-
-        <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light opacity-0 animate-[fadeIn_1.5s_ease-out_1s_forwards]">
-            Experience the pinnacle of sartorial excellence with handcrafted bespoke suits tailored to your legacy.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0 animate-[fadeIn_1.5s_ease-out_1.2s_forwards]">
+    <div class="max-w-7xl mx-auto w-full px-6 py-20 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
-            <button class="relative overflow-hidden group/btn bg-gold text-white px-10 py-5 rounded-sm font-bold uppercase tracking-[0.2em] transition-all duration-500 hover:shadow-[0_0_30px_rgba(197,160,89,0.4)] active:scale-95">
-                <span class="relative z-10">Book Appointment</span>
-                <div class="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out"></div>
-                <span class="absolute inset-0 z-20 flex items-center justify-center text-black opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500">Book Appointment</span>
-            </button>
+            <div class="lg:col-span-7 space-y-12 text-center lg:text-left">
+                
+                <div class="space-y-6">
+                    <div class="flex items-center justify-center lg:justify-start gap-4">
+                        <span class="w-12 h-[1px] bg-gold"></span>
+                        <span class="text-[10px] uppercase tracking-[0.5em] text-gold font-bold">The Sartorial Legacy</span>
+                    </div>
 
-            <button class="group/btn2 relative border border-white/30 text-white px-10 py-5 rounded-sm font-bold uppercase tracking-[0.2em] overflow-hidden transition-all duration-500 hover:border-gold">
-                <span class="relative z-10 group-hover/btn2:text-gold transition-colors">Explore Fabrics</span>
-                <div class="absolute bottom-0 left-0 w-full h-0 bg-gold/10 group-hover/btn2:h-full transition-all duration-500"></div>
-            </button>
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif text-zinc-900 dark:text-white leading-[1.05]">
+                        Tailored to <br> <span class="italic text-gold">Perfection.</span>
+                    </h1>
+
+                    <p class="text-zinc-500 dark:text-zinc-400 text-base md:text-lg font-light max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                        Experience the pinnacle of bespoke craftsmanship where every measurement is a tribute to your individual form and every stitch is a testament to your legacy.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-6 pt-4 justify-center lg:justify-start">
+                    <a href="booking.html" class="w-full sm:w-auto">
+                        <button class="w-full px-12 py-6 bg-zinc-950 dark:bg-gold text-white dark:text-zinc-950 text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-gold dark:hover:bg-white hover:text-white dark:hover:text-zinc-950 transition-all shadow-2xl active:scale-95">
+                            Book Consultation
+                        </button>
+                    </a>
+                    
+                    <a href="gallery.html" 
+                       class="group relative inline-flex items-center justify-center px-12 py-5 overflow-hidden border border-zinc-200 dark:border-zinc-800 transition-all duration-500 hover:border-gold">
+                        <span class="absolute inset-0 w-0 bg-gold transition-all duration-500 ease-out group-hover:w-full"></span>
+                        <span class="relative flex items-center gap-4 text-[10px] uppercase tracking-[0.4em] text-zinc-500 dark:text-zinc-400 font-bold transition-colors duration-500 group-hover:text-white">
+                            View Lookbook
+                            <span class="w-6 h-[1px] bg-zinc-300 dark:bg-zinc-700 transition-all duration-500 group-hover:w-8 group-hover:bg-white/50"></span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 relative group">
+                <div class="relative aspect-[4/5] overflow-hidden bg-white dark:bg-zinc-900 shadow-3xl border border-zinc-100 dark:border-zinc-800">
+                    <img src="assets/index hero" 
+                         alt="Bespoke Craftsmanship" 
+                         class="w-full h-full object-contain p-4 transition-transform duration-[4000ms] ease-out group-hover:scale-105">
+                    
+                    <div class="absolute bottom-8 -left-8 bg-white dark:bg-zinc-900 p-6 shadow-2xl border border-zinc-100 dark:border-zinc-800 hidden xl:block transition-transform duration-700 group-hover:-translate-y-2">
+                        <p class="text-[10px] uppercase tracking-widest text-gold font-bold mb-1">Hand-Finished</p>
+                        <p class="text-zinc-500 dark:text-zinc-400 text-[9px] uppercase tracking-tighter">Savile Row Standard • London</p>
+                    </div>
+                </div>
+
+                <div class="absolute -top-6 -left-6 w-32 h-32 border-t border-l border-gold/40"></div>
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 border-b border-r border-gold/40"></div>
+            </div>
+
         </div>
     </div>
-
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-60">
-        <span class="text-[10px] uppercase tracking-[0.4em] text-white">Scroll</span>
-        <div class="w-[1px] h-12 bg-gradient-to-b from-gold to-transparent relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-full bg-white animate-[scrollLine_2s_infinite]"></div>
-        </div>
-    </div>
-
 </section>
+
+<style>
+    /* Add these custom keyframes to your global CSS if not already present */
+    @keyframes slideUp {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>
 
 <style>
     @keyframes slideUp {
@@ -514,7 +537,7 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
             </div>
 
             <div class="group relative aspect-[4/5] md:aspect-auto md:h-[450px] lg:h-[550px] overflow-hidden rounded-sm cursor-pointer shadow-lg">
-                <img src="assets/Business Suits" 
+                <img src="assets/Business Suits1" 
                      alt="Business Suits" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-90 transition-opacity"></div>
                 <div class="absolute inset-0 p-6 lg:p-10 flex flex-col justify-end">
@@ -536,7 +559,7 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
             </div>
 
             <div class="group relative aspect-[4/5] md:aspect-auto md:h-[450px] lg:h-[550px] overflow-hidden rounded-sm cursor-pointer shadow-lg">
-                <img src="assets/Casual Blazers" 
+                <img src="assets/blazzer" 
                      alt="Casual Blazers" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-90 transition-opacity"></div>
                 <div class="absolute inset-0 p-6 lg:p-10 flex flex-col justify-end">
@@ -759,10 +782,14 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
 
             <div class="group relative lg:col-span-2 overflow-hidden rounded-sm h-[350px]">
                 <div class="flex h-full w-full">
-                    <div class="w-1/2 h-full relative overflow-hidden border-r border-white/20">
-                        <img src="assets/Initial Fitting" class="w-full h-full object-cover grayscale brightness-75 dark:brightness-50">
-                        <span class="absolute bottom-4 left-4 text-[9px] text-white uppercase tracking-widest bg-black/50 dark:bg-zinc-950/70 px-2 py-1 backdrop-blur-sm">Initial Fitting</span>
-                    </div>
+                    <div class="w-1/2 h-full relative overflow-hidden border-r border-white/20 bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center">
+    <img src="assets/Initial Fitting" 
+         class="w-full h-full object-contain grayscale brightness-75 dark:brightness-50 transition-transform duration-700">
+    
+    <span class="absolute bottom-4 left-4 text-[9px] text-white uppercase tracking-widest bg-black/50 dark:bg-zinc-950/70 px-2 py-1 backdrop-blur-sm z-10">
+        Initial Fitting
+    </span>
+</div>
                     <div class="w-1/2 h-full relative overflow-hidden">
                         <img src="assets/final" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]">
                         <span class="absolute bottom-4 left-4 text-[9px] text-white uppercase tracking-widest bg-gold px-2 py-1">Final Result</span>
@@ -1103,14 +1130,7 @@ window.addEventListener('DOMContentLoaded', highlightActiveLink);
                             <i class="fa-solid fa-arrow-right-long transition-transform group-hover:translate-x-2"></i>
                         </button>
                         
-                        <div class="flex items-center gap-4 mt-8 opacity-60">
-                            <div class="flex -space-x-2">
-                                <div class="w-6 h-6 rounded-full bg-gray-200 dark:bg-zinc-700 border border-white dark:border-zinc-800"></div>
-                                <div class="w-6 h-6 rounded-full bg-gray-300 dark:bg-zinc-600 border border-white dark:border-zinc-800"></div>
-                                <div class="w-6 h-6 rounded-full bg-gray-400 dark:bg-zinc-500 border border-white dark:border-zinc-800"></div>
-                            </div>
-                            <p class="text-[9px] uppercase tracking-widest font-bold text-gray-900 dark:text-zinc-400 italic">Join 200+ clients booked this month</p>
-                        </div>
+                        
                     </div>
                 </form>
             </div>
